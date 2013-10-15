@@ -101,7 +101,8 @@ public:
     typedef std::map<int,ofTouchEventArgs> TouchMap;
     typedef std::vector<ofTouchEventArgs>  Touches;
 
-    enum ScalingMode {
+    enum ScalingMode
+    {
         SCALE_TO_WINDOW = 0,
         SCALE_TO_RECT   = 1,
         NORMALIZED      = 2,
