@@ -30,6 +30,10 @@ namespace ofx {
 namespace Input {
 
 
+const std::size_t TouchPad::DEFAULT_DEVICE_ID = 0;
+const std::size_t TouchPad::DEFAULT_DOUBLE_TAP_SPEED = 500;
+
+
 //------------------------------------------------------------------------------
 void TouchPad::refreshDeviceList()
 {

@@ -131,19 +131,16 @@ public:
     void setScalingRect(const ofRectangle& scalingRect);
 
     static TouchPad& getTouchPadRef();
-    
+
+    static const std::size_t DEFAULT_DEVICE_ID;
+    static const std::size_t DEFAULT_DOUBLE_TAP_SPEED;
+
 private:
     typedef std::map<int,DeviceInfo*> DeviceMap;
-    
-    enum
-    {
-        MAX_TOUCHES = 1024
-    };
 
     enum
     {
-        DEFAULT_DEVICE_ID = 0,
-        DEFAULT_DOUBLE_TAP_SPEED = 500
+        MAX_TOUCHES = 1024
     };
 
     // singleton
