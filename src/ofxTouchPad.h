@@ -1,6 +1,6 @@
 // =============================================================================
 //
-// Copyright (c) 2010-2014 Christopher Baker <http://christopherbaker.net>
+// Copyright (c) 2009-2014 Christopher Baker <http://christopherbaker.net>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,11 +23,9 @@
 // =============================================================================
 
 
-#include "ofApp.h"
+#pragma once
 
 
-int main()
-{
-	ofSetupOpenGL(1024, 768, OF_WINDOW);
-	ofRunApp(new ofApp());
-}
+#include "ofxPointer.h"
+#include "ofx/MTTypes.h"
+#include "ofx/TouchPad.h"

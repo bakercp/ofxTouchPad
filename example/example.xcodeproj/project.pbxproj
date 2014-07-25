@@ -3,16 +3,20 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 42;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		28946A0210AF5802E35A0BE1 /* TouchPad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 030072A1EE8FF9CEC6E7BCEA /* TouchPad.cpp */; };
+		5E1F753873A7EF0AD4EDFF9F /* PointerEventArgs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA607D2FAE5F44E1770E703E /* PointerEventArgs.cpp */; };
+		8F29191C96464A5DEF57CCAF /* PointShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81D52F7164ABC2BD5F753100 /* PointShape.cpp */; };
+		9012AAF6FBECC1CAA76106A1 /* Point.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFE0B6C798592B66271BE771 /* Point.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
+		D0402F084189F48C6ED17091 /* PointerEvents.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8364A465E6BAC9C172C4C106 /* PointerEvents.cpp */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
 		E45BE97C0E8CC7DD009D7055 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */; };
 		E45BE97D0E8CC7DD009D7055 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9730E8CC7DD009D7055 /* AudioToolbox.framework */; };
-		E45BE97E0E8CC7DD009D7055 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9740E8CC7DD009D7055 /* Carbon.framework */; };
 		E45BE97F0E8CC7DD009D7055 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9750E8CC7DD009D7055 /* CoreAudio.framework */; };
 		E45BE9800E8CC7DD009D7055 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9760E8CC7DD009D7055 /* CoreFoundation.framework */; };
 		E45BE9810E8CC7DD009D7055 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9770E8CC7DD009D7055 /* CoreServices.framework */; };
@@ -27,8 +31,7 @@
 		E7E077E515D3B63C0020DFD4 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7E077E415D3B63C0020DFD4 /* CoreVideo.framework */; };
 		E7E077E815D3B6510020DFD4 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7E077E715D3B6510020DFD4 /* QTKit.framework */; };
 		E7F985F815E0DEA3003869B5 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F985F515E0DE99003869B5 /* Accelerate.framework */; };
-		FD5EDED61687D5AD00228721 /* MultitouchSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD5EDED51687D5AD00228721 /* MultitouchSupport.framework */; };
-		FD8F146F17070CA800A18E8F /* TouchPad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD8F146D17070CA800A18E8F /* TouchPad.cpp */; };
+		FD0660E71982D6D200249BB2 /* MultitouchSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD0660E61982D6D200249BB2 /* MultitouchSupport.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,12 +65,22 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		030072A1EE8FF9CEC6E7BCEA /* TouchPad.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = TouchPad.cpp; path = ../../../addons/ofxTouchPad/libs/ofxTouchPad/src/TouchPad.cpp; sourceTree = SOURCE_ROOT; };
+		052F533DEEA381BED3F5B979 /* ofxPointer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxPointer.h; path = ../../../addons/ofxPointer/src/ofxPointer.h; sourceTree = SOURCE_ROOT; };
+		090A267B71A213FF1F440ACE /* Point.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = Point.h; path = ../../../addons/ofxPointer/libs/ofxPointer/includes/ofx/Point.h; sourceTree = SOURCE_ROOT; };
+		81D52F7164ABC2BD5F753100 /* PointShape.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = PointShape.cpp; path = ../../../addons/ofxPointer/libs/ofxPointer/src/PointShape.cpp; sourceTree = SOURCE_ROOT; };
+		8332EA6147695A598297701B /* TouchPad.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = TouchPad.h; path = ../../../addons/ofxTouchPad/libs/ofxTouchPad/includes/ofx/TouchPad.h; sourceTree = SOURCE_ROOT; };
+		8364A465E6BAC9C172C4C106 /* PointerEvents.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = PointerEvents.cpp; path = ../../../addons/ofxPointer/libs/ofxPointer/src/PointerEvents.cpp; sourceTree = SOURCE_ROOT; };
+		85A25F4E29F09C8072C174F8 /* PointerEventArgs.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = PointerEventArgs.h; path = ../../../addons/ofxPointer/libs/ofxPointer/includes/ofx/PointerEventArgs.h; sourceTree = SOURCE_ROOT; };
+		966F9445F2A59943AB317148 /* MTTypes.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = MTTypes.h; path = ../../../addons/ofxTouchPad/libs/ofxTouchPad/includes/ofx/MTTypes.h; sourceTree = SOURCE_ROOT; };
+		B5B9DF4B48B8A063C3E7FF46 /* PointShape.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = PointShape.h; path = ../../../addons/ofxPointer/libs/ofxPointer/includes/ofx/PointShape.h; sourceTree = SOURCE_ROOT; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
+		BFE0B6C798592B66271BE771 /* Point.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = Point.cpp; path = ../../../addons/ofxPointer/libs/ofxPointer/src/Point.cpp; sourceTree = SOURCE_ROOT; };
+		CAAF313F120A855D215E569E /* ofxTouchPad.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxTouchPad.h; path = ../../../addons/ofxTouchPad/src/ofxTouchPad.h; sourceTree = SOURCE_ROOT; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
 		E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = /System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<absolute>"; };
 		E45BE9730E8CC7DD009D7055 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = /System/Library/Frameworks/AudioToolbox.framework; sourceTree = "<absolute>"; };
-		E45BE9740E8CC7DD009D7055 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 		E45BE9750E8CC7DD009D7055 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = /System/Library/Frameworks/CoreAudio.framework; sourceTree = "<absolute>"; };
 		E45BE9760E8CC7DD009D7055 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = /System/Library/Frameworks/CoreFoundation.framework; sourceTree = "<absolute>"; };
 		E45BE9770E8CC7DD009D7055 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = /System/Library/Frameworks/CoreServices.framework; sourceTree = "<absolute>"; };
@@ -86,10 +99,9 @@
 		E7E077E415D3B63C0020DFD4 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = /System/Library/Frameworks/CoreVideo.framework; sourceTree = "<absolute>"; };
 		E7E077E715D3B6510020DFD4 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = /System/Library/Frameworks/QTKit.framework; sourceTree = "<absolute>"; };
 		E7F985F515E0DE99003869B5 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = /System/Library/Frameworks/Accelerate.framework; sourceTree = "<absolute>"; };
-		FD5EDED51687D5AD00228721 /* MultitouchSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultitouchSupport.framework; path = ../../../../../../../../../System/Library/PrivateFrameworks/MultitouchSupport.framework; sourceTree = "<group>"; };
-		FD8F146C17070CA800A18E8F /* MTTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MTTypes.h; path = ../src/MTTypes.h; sourceTree = "<group>"; };
-		FD8F146D17070CA800A18E8F /* TouchPad.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TouchPad.cpp; path = ../src/TouchPad.cpp; sourceTree = "<group>"; };
-		FD8F146E17070CA800A18E8F /* TouchPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TouchPad.h; path = ../src/TouchPad.h; sourceTree = "<group>"; };
+		E87D9AA5DB31069EC302D135 /* PointerEvents.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = PointerEvents.h; path = ../../../addons/ofxPointer/libs/ofxPointer/includes/ofx/PointerEvents.h; sourceTree = SOURCE_ROOT; };
+		FA607D2FAE5F44E1770E703E /* PointerEventArgs.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = PointerEventArgs.cpp; path = ../../../addons/ofxPointer/libs/ofxPointer/src/PointerEventArgs.cpp; sourceTree = SOURCE_ROOT; };
+		FD0660E61982D6D200249BB2 /* MultitouchSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultitouchSupport.framework; path = ../../../../../../../../../System/Library/PrivateFrameworks/MultitouchSupport.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,35 +116,116 @@
 				E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */,
 				E45BE97C0E8CC7DD009D7055 /* ApplicationServices.framework in Frameworks */,
 				E45BE97D0E8CC7DD009D7055 /* AudioToolbox.framework in Frameworks */,
-				E45BE97E0E8CC7DD009D7055 /* Carbon.framework in Frameworks */,
 				E45BE97F0E8CC7DD009D7055 /* CoreAudio.framework in Frameworks */,
 				E45BE9800E8CC7DD009D7055 /* CoreFoundation.framework in Frameworks */,
 				E45BE9810E8CC7DD009D7055 /* CoreServices.framework in Frameworks */,
 				E45BE9830E8CC7DD009D7055 /* OpenGL.framework in Frameworks */,
 				E45BE9840E8CC7DD009D7055 /* QuickTime.framework in Frameworks */,
 				E4C2424710CC5A17004149E2 /* AppKit.framework in Frameworks */,
+				FD0660E71982D6D200249BB2 /* MultitouchSupport.framework in Frameworks */,
 				E4C2424810CC5A17004149E2 /* Cocoa.framework in Frameworks */,
 				E4C2424910CC5A17004149E2 /* IOKit.framework in Frameworks */,
 				E7E077E515D3B63C0020DFD4 /* CoreVideo.framework in Frameworks */,
-				FD5EDED61687D5AD00228721 /* MultitouchSupport.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0b520a8f9cbd72dd1acc7e642f9544f9 /* TouchPad */ = {
+		0320D6AF09CE857EE4093D00 /* includes */ = {
 			isa = PBXGroup;
 			children = (
-				e443632a9da1c74d78aa5cf9268d151b /* src */,
+				A90A74445A7D9202BDAD9CC7 /* ofx */,
 			);
-			name = TouchPad;
+			name = includes;
+			sourceTree = "<group>";
+		};
+		193CA4A0AE995DF627343AC8 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				052F533DEEA381BED3F5B979 /* ofxPointer.h */,
+			);
+			name = src;
+			sourceTree = "<group>";
+		};
+		1FFA5BF7642002ABC599A597 /* ofxPointer */ = {
+			isa = PBXGroup;
+			children = (
+				0320D6AF09CE857EE4093D00 /* includes */,
+				558879234BB2324E57304F98 /* src */,
+			);
+			name = ofxPointer;
+			sourceTree = "<group>";
+		};
+		4ADAB81114C3760A85ED9941 /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				1FFA5BF7642002ABC599A597 /* ofxPointer */,
+			);
+			name = libs;
+			sourceTree = "<group>";
+		};
+		50DC445599CCBB8E507F3596 /* ofx */ = {
+			isa = PBXGroup;
+			children = (
+				966F9445F2A59943AB317148 /* MTTypes.h */,
+				8332EA6147695A598297701B /* TouchPad.h */,
+			);
+			name = ofx;
+			sourceTree = "<group>";
+		};
+		558879234BB2324E57304F98 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				BFE0B6C798592B66271BE771 /* Point.cpp */,
+				FA607D2FAE5F44E1770E703E /* PointerEventArgs.cpp */,
+				8364A465E6BAC9C172C4C106 /* PointerEvents.cpp */,
+				81D52F7164ABC2BD5F753100 /* PointShape.cpp */,
+			);
+			name = src;
+			sourceTree = "<group>";
+		};
+		572B4C5840042E0F5AF10C48 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				030072A1EE8FF9CEC6E7BCEA /* TouchPad.cpp */,
+			);
+			name = src;
+			sourceTree = "<group>";
+		};
+		5F581F4C723427FD019BF838 /* ofxTouchPad */ = {
+			isa = PBXGroup;
+			children = (
+				CCFB7985013BA093816BA91E /* src */,
+				C1B43B7C3D83FFDA8A9414F8 /* libs */,
+			);
+			name = ofxTouchPad;
+			sourceTree = "<group>";
+		};
+		9AE1A18D0358915E079E8CF9 /* includes */ = {
+			isa = PBXGroup;
+			children = (
+				50DC445599CCBB8E507F3596 /* ofx */,
+			);
+			name = includes;
+			sourceTree = "<group>";
+		};
+		A90A74445A7D9202BDAD9CC7 /* ofx */ = {
+			isa = PBXGroup;
+			children = (
+				090A267B71A213FF1F440ACE /* Point.h */,
+				85A25F4E29F09C8072C174F8 /* PointerEventArgs.h */,
+				E87D9AA5DB31069EC302D135 /* PointerEvents.h */,
+				B5B9DF4B48B8A063C3E7FF46 /* PointShape.h */,
+			);
+			name = ofx;
 			sourceTree = "<group>";
 		};
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
-				0b520a8f9cbd72dd1acc7e642f9544f9 /* TouchPad */,
+				CCC21C030DDB54EA180B4E01 /* ofxPointer */,
+				5F581F4C723427FD019BF838 /* ofxTouchPad */,
 			);
 			name = addons;
 			sourceTree = "<group>";
@@ -140,7 +233,7 @@
 		BBAB23C913894ECA00AA2426 /* system frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				FD5EDED51687D5AD00228721 /* MultitouchSupport.framework */,
+				FD0660E61982D6D200249BB2 /* MultitouchSupport.framework */,
 				E7F985F515E0DE99003869B5 /* Accelerate.framework */,
 				E4C2424410CC5A17004149E2 /* AppKit.framework */,
 				E4C2424510CC5A17004149E2 /* Cocoa.framework */,
@@ -148,7 +241,6 @@
 				E45BE9710E8CC7DD009D7055 /* AGL.framework */,
 				E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */,
 				E45BE9730E8CC7DD009D7055 /* AudioToolbox.framework */,
-				E45BE9740E8CC7DD009D7055 /* Carbon.framework */,
 				E45BE9750E8CC7DD009D7055 /* CoreAudio.framework */,
 				E45BE9760E8CC7DD009D7055 /* CoreFoundation.framework */,
 				E45BE9770E8CC7DD009D7055 /* CoreServices.framework */,
@@ -166,6 +258,31 @@
 				BBAB23BE13894E4700AA2426 /* GLUT.framework */,
 			);
 			name = "3rd party frameworks";
+			sourceTree = "<group>";
+		};
+		C1B43B7C3D83FFDA8A9414F8 /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				EFFF98C4285732105EAC5FA6 /* ofxTouchPad */,
+			);
+			name = libs;
+			sourceTree = "<group>";
+		};
+		CCC21C030DDB54EA180B4E01 /* ofxPointer */ = {
+			isa = PBXGroup;
+			children = (
+				193CA4A0AE995DF627343AC8 /* src */,
+				4ADAB81114C3760A85ED9941 /* libs */,
+			);
+			name = ofxPointer;
+			sourceTree = "<group>";
+		};
+		CCFB7985013BA093816BA91E /* src */ = {
+			isa = PBXGroup;
+			children = (
+				CAAF313F120A855D215E569E /* ofxTouchPad.h */,
+			);
+			name = src;
 			sourceTree = "<group>";
 		};
 		E4328144138ABC890047C5CB /* Products */ = {
@@ -217,14 +334,13 @@
 			name = openFrameworks;
 			sourceTree = "<group>";
 		};
-		e443632a9da1c74d78aa5cf9268d151b /* src */ = {
+		EFFF98C4285732105EAC5FA6 /* ofxTouchPad */ = {
 			isa = PBXGroup;
 			children = (
-				FD8F146C17070CA800A18E8F /* MTTypes.h */,
-				FD8F146D17070CA800A18E8F /* TouchPad.cpp */,
-				FD8F146E17070CA800A18E8F /* TouchPad.h */,
+				9AE1A18D0358915E079E8CF9 /* includes */,
+				572B4C5840042E0F5AF10C48 /* src */,
 			);
-			name = src;
+			name = ofxTouchPad;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -255,9 +371,10 @@
 		E4B69B4C0A3A1720003C02F2 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0460;
 			};
 			buildConfigurationList = E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "example" */;
-			compatibilityVersion = "Xcode 2.4";
+			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -304,7 +421,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cp -f ../../../libs/fmodex/lib/osx/libfmodex.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/libfmodex.dylib\"; install_name_tool -change ./libfmodex.dylib @executable_path/libfmodex.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/$PRODUCT_NAME\";";
+			shellScript = "cp -f ../../../libs/fmodex/lib/osx/libfmodex.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/libfmodex.dylib\"; install_name_tool -change ./libfmodex.dylib @executable_path/libfmodex.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/$PRODUCT_NAME\";\nmkdir -p \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Resources/\"\ncp -f \"$ICON_FILE\" \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Resources/\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -315,7 +432,11 @@
 			files = (
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
-				FD8F146F17070CA800A18E8F /* TouchPad.cpp in Sources */,
+				9012AAF6FBECC1CAA76106A1 /* Point.cpp in Sources */,
+				5E1F753873A7EF0AD4EDFF9F /* PointerEventArgs.cpp in Sources */,
+				D0402F084189F48C6ED17091 /* PointerEvents.cpp in Sources */,
+				8F29191C96464A5DEF57CCAF /* PointShape.cpp in Sources */,
+				28946A0210AF5802E35A0BE1 /* TouchPad.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,10 +473,23 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(OF_CORE_HEADERS)",
-					src,
 					../../../addons/ofxMultiTouchPad/libs,
 					../../../addons/ofxMultiTouchPad/src,
+					src,
+					../../../addons/ofxPointer/libs,
+					../../../addons/ofxPointer/libs/ofxPointer,
+					../../../addons/ofxPointer/libs/ofxPointer/includes,
+					../../../addons/ofxPointer/libs/ofxPointer/includes/ofx,
+					../../../addons/ofxPointer/libs/ofxPointer/src,
+					../../../addons/ofxPointer/src,
+					../../../addons/ofxTouchPad/libs,
+					../../../addons/ofxTouchPad/libs/ofxTouchPad,
+					../../../addons/ofxTouchPad/libs/ofxTouchPad/includes,
+					../../../addons/ofxTouchPad/libs/ofxTouchPad/includes/ofx,
+					../../../addons/ofxTouchPad/libs/ofxTouchPad/src,
+					../../../addons/ofxTouchPad/src,
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_CPLUSPLUSFLAGS = (
 					"-D__MACOSX_CORE__",
 					"-lpthread",
@@ -388,10 +522,23 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(OF_CORE_HEADERS)",
-					src,
 					../../../addons/ofxMultiTouchPad/libs,
 					../../../addons/ofxMultiTouchPad/src,
+					src,
+					../../../addons/ofxPointer/libs,
+					../../../addons/ofxPointer/libs/ofxPointer,
+					../../../addons/ofxPointer/libs/ofxPointer/includes,
+					../../../addons/ofxPointer/libs/ofxPointer/includes/ofx,
+					../../../addons/ofxPointer/libs/ofxPointer/src,
+					../../../addons/ofxPointer/src,
+					../../../addons/ofxTouchPad/libs,
+					../../../addons/ofxTouchPad/libs/ofxTouchPad,
+					../../../addons/ofxTouchPad/libs/ofxTouchPad/includes,
+					../../../addons/ofxTouchPad/libs/ofxTouchPad/includes/ofx,
+					../../../addons/ofxTouchPad/libs/ofxTouchPad/src,
+					../../../addons/ofxTouchPad/src,
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_CPLUSPLUSFLAGS = (
 					"-D__MACOSX_CORE__",
 					"-lpthread",
@@ -404,20 +551,19 @@
 		E4B69B600A3A1757003C02F2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
-					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_2)",
+					"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../../libs/glut/lib/osx\"";
-				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks\"";
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_MODEL_TUNING = NONE;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				ICON = "$(ICON_NAME_DEBUG)";
+				ICON_FILE = "$(ICON_FILE_PATH)$(ICON)";
 				INFOPLIST_FILE = "openFrameworks-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = (
@@ -484,7 +630,6 @@
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_51)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_52)",
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)Debug";
 				WRAPPER_EXTENSION = app;
 			};
@@ -493,19 +638,18 @@
 		E4B69B610A3A1757003C02F2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
-					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_2)",
+					"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../../libs/glut/lib/osx\"";
-				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks\"";
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_MODEL_TUNING = NONE;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				ICON = "$(ICON_NAME_RELEASE)";
+				ICON_FILE = "$(ICON_FILE_PATH)$(ICON)";
 				INFOPLIST_FILE = "openFrameworks-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = (
@@ -572,7 +716,6 @@
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_50)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_51)",
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

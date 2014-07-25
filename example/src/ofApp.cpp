@@ -1,6 +1,6 @@
 // =============================================================================
 //
-// Copyright (c) 2010-2013 Christopher Baker <http://christopherbaker.net>
+// Copyright (c) 2010-2014 Christopher Baker <http://christopherbaker.net>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,24 +26,20 @@
 #include "ofApp.h"
 
 
-//------------------------------------------------------------------------------
 void ofApp::setup()
 {
+    ofx::RegisterPointerEvents(this);
+
     ofSetLogLevel(OF_LOG_VERBOSE);
     ofSetFrameRate(120);
     ofEnableAlphaBlending();
     ofEnableSmoothing();
     
-    TouchPadRef pad = TouchPad::getTouchPadRef();
+    ofx::TouchPad& pad = ofx::TouchPad::getTouchPadRef();
 
-    pad.setScalingRect(ofRectangle(100,100,160*5,120*5));
-    pad.setScalingMode(TouchPad::SCALE_TO_RECT);
+    pad.setScalingRect(ofRectangle(100, 100, 160 * 5, 120 * 5));
+    pad.setScalingMode(ofx::TouchPad::SCALE_TO_RECT);
     
-    ofAddListener(ofEvents().touchUp,        this, &ofApp::touchUp);
-    ofAddListener(ofEvents().touchDoubleTap, this, &ofApp::touchDoubleTap);
-    ofAddListener(ofEvents().touchDown,      this, &ofApp::touchDown);
-    ofAddListener(ofEvents().touchMoved,     this, &ofApp::touchMoved);
-
     //  The following code attempts to prevent conflicts between system-wide
     //  gesture support and the raw TouchPad data provided by ofxTouchPad.
     //    ofSystem("killall -STOP Dock"); // turn off OS level gesture support ...
@@ -51,7 +47,7 @@ void ofApp::setup()
     //    ofHideCursor();
 }
 
-//------------------------------------------------------------------------------
+
 void ofApp::exit()
 {
     //  The following code re-enables default system-wide gesture support.
@@ -60,12 +56,12 @@ void ofApp::exit()
     //    ofShowCursor();
 }
 
-//------------------------------------------------------------------------------
+
 void ofApp::draw()
 {
     ofBackground(0);
     
-    TouchPadRef pad = TouchPad::getTouchPadRef();
+    ofx::TouchPad& pad = ofx::TouchPad::getTouchPadRef();
 
     ofSetColor(255,255,255);
     ofDrawBitmapString("TouchCount: " + ofToString(pad.getTouchCount(), 0), 20, 20);
@@ -78,9 +74,9 @@ void ofApp::draw()
     
     ofRectRounded(scalingRect, 10);
     
-    TouchPad::Touches touches = pad.getTouches();
+    ofx::TouchPad::Touches touches = pad.getTouches();
 
-    for(std::size_t i=0; i<touches.size(); ++i)
+    for(std::size_t i=0; i < touches.size(); ++i)
     {
         ofPushMatrix();
         ofTranslate(touches[i].x, touches[i].y);
@@ -104,88 +100,47 @@ void ofApp::draw()
         ofSetColor(255);
         ofDrawBitmapString(ofToString(touches[i].id),touches[i].x-6, touches[i].y+3);
         ofSetColor(255, 255, 255, 100);
-
     }
 }
 
-//------------------------------------------------------------------------------
-std::string ofApp::touchToString(const ofTouchEventArgs& touch)
+
+bool ofApp::onPointerUp(ofx::PointerEventArgs& evt)
 {
-    std::stringstream ss;
-    
-    std::string typeString;
-    switch(touch.type) {
-        case ofTouchEventArgs::down:
-            typeString = "DOWN";
-            break;
-        case ofTouchEventArgs::up:
-            typeString = "UP";
-            break;
-        case ofTouchEventArgs::move:
-            typeString = "MOVE";
-            break;
-        case ofTouchEventArgs::doubleTap:
-            typeString = "DOUBLE TAP";
-            break;
-        case ofTouchEventArgs::cancel:
-            typeString = "CANCEL";
-            break;
-        default:
-            typeString = "UNKNOWN TOUCH TYPE";
-            break;
+    ofLogVerbose("ofApp::onPointerUp") << evt.toString();
+    return true;
+}
+
+
+bool ofApp::onPointerDown(ofx::PointerEventArgs& evt)
+{
+    ofLogVerbose("ofApp::onPointerDown") << evt.toString();
+
+    if (evt.getTapCount() > 1)
+    {
+        ofLogVerbose("ofApp::onPointerDown") << "Double tap!";
     }
 
-//    ss << "deviceId=" << touch.deviceId << std::endl;
-
-    ss << "type=" << typeString << " (" << touch.type << ")" << std::endl;
-    ss << "id=" << touch.id << " @ " << touch.time << std::endl;
-//    ss << "\ttapCount=" << 0 << endl;
-    ss << "\t#touches=" << touch.numTouches << " angle=" << touch.angle << " pressure=" << touch.pressure << std::endl;
-    ss << "\t p =[" << touch.x << "," << touch.y << "]" << std::endl;
-    ss << "\t s =[" << touch.width << "," << touch.height << "]" << std::endl;
-    ss << "\t ax=[" << touch.minoraxis << "," << touch.majoraxis << "]" << std::endl;
-    ss << "\t s =[" << touch.xspeed << "," << touch.yspeed << "]" << std::endl;
-    ss << "\t a =[" << touch.xaccel << "," << touch.yaccel << "]" << std::endl;
-    
-    ss << "-----------------" << std::endl;
-    
-    return ss.str();
- 
+    return true;
 }
 
-//------------------------------------------------------------------------------
-void ofApp::touchDown(ofTouchEventArgs& touch)
+
+bool ofApp::onPointerMove(ofx::PointerEventArgs& evt)
 {
-    std::cout << touchToString(touch) << std::endl;
+    ofLogVerbose("ofApp::onPointerMove") << evt.toString();
+    return true;
 }
 
-//------------------------------------------------------------------------------
-void ofApp::touchMoved(ofTouchEventArgs& touch)
+
+bool ofApp::onPointerCancel(ofx::PointerEventArgs& evt)
 {
-    std::cout << touchToString(touch) << std::endl;
+    ofLogVerbose("ofApp::onPointerCancel") << evt.toString();
+    return true;
 }
 
-//------------------------------------------------------------------------------
-void ofApp::touchUp(ofTouchEventArgs& touch)
+
+void ofApp::keyPressed(int key)
 {
-    std::cout << touchToString(touch) << std::endl;
-}
-
-//------------------------------------------------------------------------------
-void ofApp::touchDoubleTap(ofTouchEventArgs& touch)
-{
-    std::cout << touchToString(touch) << std::endl;
-}
-
-//------------------------------------------------------------------------------
-void ofApp::touchCancelled(ofTouchEventArgs& touch)
-{
-    std::cout << touchToString(touch) << std::endl;
-}
-
-//------------------------------------------------------------------------------
-void ofApp::keyPressed(int key){
-    if (key=='f')
+    if (key == 'f')
     {
         ofToggleFullscreen();
         ofBackground(0,0,0);

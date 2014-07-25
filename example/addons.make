@@ -1,1 +1,3 @@
 ofxMultiTouchPad
+ofxPointer
+ofxTouchPad

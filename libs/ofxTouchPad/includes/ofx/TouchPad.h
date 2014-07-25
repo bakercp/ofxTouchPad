@@ -57,7 +57,6 @@
 
 
 namespace ofx {
-namespace Input {
 
 
 class TapCount
@@ -98,7 +97,7 @@ public:
 class TouchPad
 {
 public:
-    typedef std::map<int,ofTouchEventArgs> TouchMap;
+    typedef std::map<int, ofTouchEventArgs> TouchMap;
     typedef std::vector<ofTouchEventArgs>  Touches;
 
     enum ScalingMode
@@ -178,9 +177,6 @@ private:
 
     friend class Poco::SingletonHolder<TouchPad>;
 };
-
-
-typedef TouchPad& TouchPadRef;
     
 
-} } // ofx::Input
+} // ofx

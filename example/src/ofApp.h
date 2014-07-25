@@ -1,6 +1,6 @@
 // =============================================================================
 //
-// Copyright (c) 2010-2013 Christopher Baker <http://christopherbaker.net>
+// Copyright (c) 2010-2014 Christopher Baker <http://christopherbaker.net>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -27,11 +27,7 @@
 
 
 #include "ofMain.h"
-#include "TouchPad.h"
-
-
-using ofx::Input::TouchPad;
-using ofx::Input::TouchPadRef;
+#include "ofxTouchPad.h"
 
 
 class ofApp: public ofBaseApp
@@ -43,12 +39,9 @@ public:
 
     void keyPressed(int key);
 
-    void touchDown(ofTouchEventArgs& touch);
-    void touchMoved(ofTouchEventArgs& touch);
-    void touchUp(ofTouchEventArgs& touch);
-    void touchDoubleTap(ofTouchEventArgs& touch);
-    void touchCancelled(ofTouchEventArgs& touch);
-
-    std::string touchToString(const ofTouchEventArgs& touch);
+    bool onPointerUp(ofx::PointerEventArgs& evt);
+    bool onPointerDown(ofx::PointerEventArgs& evt);
+    bool onPointerMove(ofx::PointerEventArgs& evt);
+    bool onPointerCancel(ofx::PointerEventArgs& evt);
 
 };

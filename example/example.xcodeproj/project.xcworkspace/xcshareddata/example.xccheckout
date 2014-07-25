@@ -5,15 +5,17 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>7D018359-D4CA-425F-8416-D44EE5AF9F74</string>
+	<string>5B53D1EB-F1E0-4BA1-8B31-D62FCD5456BA</string>
 	<key>IDESourceControlProjectName</key>
 	<string>example</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>33E7D2A0-EC2A-486F-80E6-A95DCAEE7648</key>
 		<string>ssh://github.com/bakercp/ofxTouchPad.git</string>
-		<key>4522E9DB-AD63-43E6-9D1D-42A3D4001371</key>
+		<key>3B34514A-1075-456B-8AF0-DAEFD698200B</key>
 		<string>ssh://github.com/bakercp/openFrameworks.git</string>
+		<key>DE2FF963-AF23-418E-8E6B-17E993EF7284</key>
+		<string>ssh://github.com/bakercp/ofxPointer.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>addons/ofxTouchPad/example/example.xcodeproj/project.xcworkspace</string>
@@ -21,17 +23,27 @@
 	<dict>
 		<key>33E7D2A0-EC2A-486F-80E6-A95DCAEE7648</key>
 		<string>../../..</string>
-		<key>4522E9DB-AD63-43E6-9D1D-42A3D4001371</key>
+		<key>3B34514A-1075-456B-8AF0-DAEFD698200B</key>
 		<string>../../../../..</string>
+		<key>DE2FF963-AF23-418E-8E6B-17E993EF7284</key>
+		<string>../../../../ofxPointer</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>ssh://github.com/bakercp/ofxTouchPad.git</string>
+	<string>ssh://github.com/bakercp/openFrameworks.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>4522E9DB-AD63-43E6-9D1D-42A3D4001371</string>
+	<string>3B34514A-1075-456B-8AF0-DAEFD698200B</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>DE2FF963-AF23-418E-8E6B-17E993EF7284</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ofxPointer</string>
+		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
@@ -44,7 +56,7 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>4522E9DB-AD63-43E6-9D1D-42A3D4001371</string>
+			<string>3B34514A-1075-456B-8AF0-DAEFD698200B</string>
 			<key>IDESourceControlWCCName</key>
 			<string>openFrameworks</string>
 		</dict>

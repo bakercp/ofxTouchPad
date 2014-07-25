@@ -23,18 +23,16 @@
 // =============================================================================
 
 
-#include "TouchPad.h"
+#include "ofx/TouchPad.h"
 
 
 namespace ofx {
-namespace Input {
 
 
 const std::size_t TouchPad::DEFAULT_DEVICE_ID = 0;
 const std::size_t TouchPad::DEFAULT_DOUBLE_TAP_SPEED = 500;
 
 
-//------------------------------------------------------------------------------
 void TouchPad::refreshDeviceList()
 {
     _deviceList = MTDeviceCreateList();
@@ -52,15 +50,14 @@ void TouchPad::refreshDeviceList()
     ofLogVerbose("TouchPad") << "MTDeviceCreateList returned " << _nDevices << " devices.";
 }
 
-//------------------------------------------------------------------------------
+
 void TouchPad::mt_callback(MTDeviceRef deviceId,
                            MTTouch* touches,
                            int32_t numTouches,
                            double timestamp,
                            int32_t frameNum)
 {
-
-    TouchPadRef pad = TouchPad::getTouchPadRef();
+    TouchPad& pad = TouchPad::getTouchPadRef();
     
     TouchPad::Touches touchEvents;
     
@@ -73,8 +70,8 @@ void TouchPad::mt_callback(MTDeviceRef deviceId,
         touchEvt.id             = evt->pathIndex;
         touchEvt.numTouches     = numTouches;
         
-//        touchEvt.timestamp    = ofGetElapsedTimeMillis();
-//        touchEvt.frameNumber  = ofGetFrameNum();
+// touchEvt.timestamp    = ofGetElapsedTimeMillis();
+// touchEvt.frameNumber  = ofGetFrameNum();
         
         switch(pad.getScalingMode())
         {
@@ -171,7 +168,7 @@ void TouchPad::mt_callback(MTDeviceRef deviceId,
 
 }
 
-//------------------------------------------------------------------------------
+
 void TouchPad::registerTouchEvents(const Touches& touchEvents)
 {
     ofScopedLock lock(_mutex);
@@ -228,7 +225,7 @@ void TouchPad::registerTouchEvents(const Touches& touchEvents)
 }
 
 
-//------------------------------------------------------------------------------
+
 TouchPad::TouchPad():
     _doubleTapSpeed(DEFAULT_DOUBLE_TAP_SPEED),
     _scalingMode(SCALE_TO_WINDOW),
@@ -243,7 +240,7 @@ TouchPad::TouchPad():
     connect(); // connect to default device
 }
 
-//------------------------------------------------------------------------------
+
 bool TouchPad::connect(int deviceId)
 {
 
@@ -286,7 +283,7 @@ bool TouchPad::connect(int deviceId)
     }
 }
 
-//------------------------------------------------------------------------------
+
 bool TouchPad::disconnect(int deviceId)
 {
     if(_deviceList != NULL && deviceId >= 0 && deviceId < _nDevices)
@@ -315,13 +312,13 @@ bool TouchPad::disconnect(int deviceId)
     }
 }
 
-//------------------------------------------------------------------------------
+
 std::size_t TouchPad::getNumDevices() const
 {
     return _nDevices;
 }
 
-//------------------------------------------------------------------------------
+
 TouchPad::~TouchPad()
 {
     DeviceMap::const_iterator iter = _devices.begin();
@@ -338,13 +335,13 @@ TouchPad::~TouchPad()
     ofLogVerbose("TouchPad") << "Multitouch devices have been disconnected.";
 }
 
-//------------------------------------------------------------------------------
+
 std::size_t TouchPad::getTouchCount() const
 {
     return _activeTouches.size();
 }
 
-//------------------------------------------------------------------------------
+
 TouchPad::Touches TouchPad::getTouches() const
 {
     ofScopedLock lock(_mutex);
@@ -363,55 +360,55 @@ TouchPad::Touches TouchPad::getTouches() const
     
 }
 
-//------------------------------------------------------------------------------
+
 TouchPad::TouchMap TouchPad::getTouchMap() const
 {
     return _activeTouches;
 }
 
-//------------------------------------------------------------------------------
+
 bool TouchPad::hasTouchId(int touchId) const
 {
     return _activeTouches.find(touchId) != _activeTouches.end();
 }
 
-//------------------------------------------------------------------------------
+
 unsigned long long TouchPad::getDoubleTapSpeed() const
 {
     return _doubleTapSpeed;
 }
 
-//------------------------------------------------------------------------------
+
 void TouchPad::setDoubleTapSpeed(unsigned long long doubleTapSpeed)
 {
     _doubleTapSpeed = doubleTapSpeed;
 }
 
-//------------------------------------------------------------------------------
+
 TouchPad::ScalingMode TouchPad::getScalingMode() const
 {
     return _scalingMode;
 }
 
-//------------------------------------------------------------------------------
+
 void TouchPad::setScalingMode(ScalingMode scalingMode)
 {
     _scalingMode = scalingMode;
 }
 
-//------------------------------------------------------------------------------
+
 ofRectangle TouchPad::getScalingRect() const
 {
     return _scalingRectangle;
 }
 
-//------------------------------------------------------------------------------
+
 void TouchPad::setScalingRect(const ofRectangle& scalingRectangle)
 {
     _scalingRectangle = scalingRectangle;
 }
 
-//------------------------------------------------------------------------------
+
 std::string TouchPad::touchPhaseToString(MTTouchPhase phase)
 {
     switch(phase) {
@@ -436,7 +433,7 @@ std::string TouchPad::touchPhaseToString(MTTouchPhase phase)
     }
 }
 
-//------------------------------------------------------------------------------
+
 void TouchPad::printDeviceInfo(MTDeviceRef deviceRef)
 {
     uuid_t guid;
@@ -499,7 +496,7 @@ void TouchPad::printDeviceInfo(MTDeviceRef deviceRef)
     }
 }
 
-//------------------------------------------------------------------------------
+
 TouchPad& TouchPad::getTouchPadRef()
 {
     static Poco::SingletonHolder<TouchPad> sh;
@@ -507,4 +504,4 @@ TouchPad& TouchPad::getTouchPadRef()
 }
 
 
-} } // ofx::Input
+} // ofx
