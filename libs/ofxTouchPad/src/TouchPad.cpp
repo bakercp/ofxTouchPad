@@ -29,10 +29,6 @@
 namespace ofx {
 
 
-const std::size_t TouchPad::DEFAULT_DEVICE_ID = 0;
-const std::size_t TouchPad::DEFAULT_DOUBLE_TAP_SPEED = 500;
-
-
 void TouchPad::refreshDeviceList()
 {
     _deviceList = MTDeviceCreateList();
@@ -73,7 +69,7 @@ void TouchPad::mt_callback(MTDeviceRef deviceId,
 // touchEvt.timestamp    = ofGetElapsedTimeMillis();
 // touchEvt.frameNumber  = ofGetFrameNum();
         
-        switch(pad.getScalingMode())
+        switch (pad.getScalingMode())
         {
             case SCALE_TO_WINDOW:
             {
