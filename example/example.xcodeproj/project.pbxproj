@@ -8,11 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		28946A0210AF5802E35A0BE1 /* TouchPad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 030072A1EE8FF9CEC6E7BCEA /* TouchPad.cpp */; };
-		5E1F753873A7EF0AD4EDFF9F /* PointerEventArgs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA607D2FAE5F44E1770E703E /* PointerEventArgs.cpp */; };
-		8F29191C96464A5DEF57CCAF /* PointShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81D52F7164ABC2BD5F753100 /* PointShape.cpp */; };
-		9012AAF6FBECC1CAA76106A1 /* Point.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFE0B6C798592B66271BE771 /* Point.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
-		D0402F084189F48C6ED17091 /* PointerEvents.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8364A465E6BAC9C172C4C106 /* PointerEvents.cpp */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
 		E45BE97C0E8CC7DD009D7055 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */; };
@@ -32,6 +28,11 @@
 		E7E077E815D3B6510020DFD4 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7E077E715D3B6510020DFD4 /* QTKit.framework */; };
 		E7F985F815E0DEA3003869B5 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F985F515E0DE99003869B5 /* Accelerate.framework */; };
 		FD0660E71982D6D200249BB2 /* MultitouchSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD0660E61982D6D200249BB2 /* MultitouchSupport.framework */; };
+		FDA244471AE57B0D004FC527 /* PointerEvents.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDA244441AE57B0D004FC527 /* PointerEvents.cpp */; };
+		FDA244481AE57B0D004FC527 /* PointerUtilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDA244451AE57B0D004FC527 /* PointerUtilities.cpp */; };
+		FDA244491AE57B0D004FC527 /* PointerUtilities_OSX.mm in Sources */ = {isa = PBXBuildFile; fileRef = FDA244461AE57B0D004FC527 /* PointerUtilities_OSX.mm */; };
+		FDD10CED1A179082003D6C4F /* ofxJSONElement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDD10CE31A179082003D6C4F /* ofxJSONElement.cpp */; };
+		FDD10CEE1A179082003D6C4F /* jsoncpp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDD10CEC1A179082003D6C4F /* jsoncpp.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,16 +67,9 @@
 
 /* Begin PBXFileReference section */
 		030072A1EE8FF9CEC6E7BCEA /* TouchPad.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = TouchPad.cpp; path = ../../../addons/ofxTouchPad/libs/ofxTouchPad/src/TouchPad.cpp; sourceTree = SOURCE_ROOT; };
-		052F533DEEA381BED3F5B979 /* ofxPointer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxPointer.h; path = ../../../addons/ofxPointer/src/ofxPointer.h; sourceTree = SOURCE_ROOT; };
-		090A267B71A213FF1F440ACE /* Point.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = Point.h; path = ../../../addons/ofxPointer/libs/ofxPointer/includes/ofx/Point.h; sourceTree = SOURCE_ROOT; };
-		81D52F7164ABC2BD5F753100 /* PointShape.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = PointShape.cpp; path = ../../../addons/ofxPointer/libs/ofxPointer/src/PointShape.cpp; sourceTree = SOURCE_ROOT; };
 		8332EA6147695A598297701B /* TouchPad.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = TouchPad.h; path = ../../../addons/ofxTouchPad/libs/ofxTouchPad/includes/ofx/TouchPad.h; sourceTree = SOURCE_ROOT; };
-		8364A465E6BAC9C172C4C106 /* PointerEvents.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = PointerEvents.cpp; path = ../../../addons/ofxPointer/libs/ofxPointer/src/PointerEvents.cpp; sourceTree = SOURCE_ROOT; };
-		85A25F4E29F09C8072C174F8 /* PointerEventArgs.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = PointerEventArgs.h; path = ../../../addons/ofxPointer/libs/ofxPointer/includes/ofx/PointerEventArgs.h; sourceTree = SOURCE_ROOT; };
 		966F9445F2A59943AB317148 /* MTTypes.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = MTTypes.h; path = ../../../addons/ofxTouchPad/libs/ofxTouchPad/includes/ofx/MTTypes.h; sourceTree = SOURCE_ROOT; };
-		B5B9DF4B48B8A063C3E7FF46 /* PointShape.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = PointShape.h; path = ../../../addons/ofxPointer/libs/ofxPointer/includes/ofx/PointShape.h; sourceTree = SOURCE_ROOT; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
-		BFE0B6C798592B66271BE771 /* Point.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = Point.cpp; path = ../../../addons/ofxPointer/libs/ofxPointer/src/Point.cpp; sourceTree = SOURCE_ROOT; };
 		CAAF313F120A855D215E569E /* ofxTouchPad.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxTouchPad.h; path = ../../../addons/ofxTouchPad/src/ofxTouchPad.h; sourceTree = SOURCE_ROOT; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
@@ -99,9 +93,19 @@
 		E7E077E415D3B63C0020DFD4 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = /System/Library/Frameworks/CoreVideo.framework; sourceTree = "<absolute>"; };
 		E7E077E715D3B6510020DFD4 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = /System/Library/Frameworks/QTKit.framework; sourceTree = "<absolute>"; };
 		E7F985F515E0DE99003869B5 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = /System/Library/Frameworks/Accelerate.framework; sourceTree = "<absolute>"; };
-		E87D9AA5DB31069EC302D135 /* PointerEvents.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = PointerEvents.h; path = ../../../addons/ofxPointer/libs/ofxPointer/includes/ofx/PointerEvents.h; sourceTree = SOURCE_ROOT; };
-		FA607D2FAE5F44E1770E703E /* PointerEventArgs.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = PointerEventArgs.cpp; path = ../../../addons/ofxPointer/libs/ofxPointer/src/PointerEventArgs.cpp; sourceTree = SOURCE_ROOT; };
 		FD0660E61982D6D200249BB2 /* MultitouchSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultitouchSupport.framework; path = ../../../../../../../../../System/Library/PrivateFrameworks/MultitouchSupport.framework; sourceTree = "<group>"; };
+		FDA2443C1AE57B0D004FC527 /* ofxPointer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxPointer.h; sourceTree = "<group>"; };
+		FDA244411AE57B0D004FC527 /* PointerEvents.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PointerEvents.h; sourceTree = "<group>"; };
+		FDA244421AE57B0D004FC527 /* PointerUtilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PointerUtilities.h; sourceTree = "<group>"; };
+		FDA244441AE57B0D004FC527 /* PointerEvents.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PointerEvents.cpp; sourceTree = "<group>"; };
+		FDA244451AE57B0D004FC527 /* PointerUtilities.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PointerUtilities.cpp; sourceTree = "<group>"; };
+		FDA244461AE57B0D004FC527 /* PointerUtilities_OSX.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = PointerUtilities_OSX.mm; sourceTree = "<group>"; };
+		FDD10CE21A179082003D6C4F /* ofxJSON.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxJSON.h; sourceTree = "<group>"; };
+		FDD10CE31A179082003D6C4F /* ofxJSONElement.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxJSONElement.cpp; sourceTree = "<group>"; };
+		FDD10CE41A179082003D6C4F /* ofxJSONElement.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxJSONElement.h; sourceTree = "<group>"; };
+		FDD10CE91A179082003D6C4F /* json-forwards.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "json-forwards.h"; sourceTree = "<group>"; };
+		FDD10CEA1A179082003D6C4F /* json.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = json.h; sourceTree = "<group>"; };
+		FDD10CEC1A179082003D6C4F /* jsoncpp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = jsoncpp.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,39 +136,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0320D6AF09CE857EE4093D00 /* includes */ = {
-			isa = PBXGroup;
-			children = (
-				A90A74445A7D9202BDAD9CC7 /* ofx */,
-			);
-			name = includes;
-			sourceTree = "<group>";
-		};
-		193CA4A0AE995DF627343AC8 /* src */ = {
-			isa = PBXGroup;
-			children = (
-				052F533DEEA381BED3F5B979 /* ofxPointer.h */,
-			);
-			name = src;
-			sourceTree = "<group>";
-		};
-		1FFA5BF7642002ABC599A597 /* ofxPointer */ = {
-			isa = PBXGroup;
-			children = (
-				0320D6AF09CE857EE4093D00 /* includes */,
-				558879234BB2324E57304F98 /* src */,
-			);
-			name = ofxPointer;
-			sourceTree = "<group>";
-		};
-		4ADAB81114C3760A85ED9941 /* libs */ = {
-			isa = PBXGroup;
-			children = (
-				1FFA5BF7642002ABC599A597 /* ofxPointer */,
-			);
-			name = libs;
-			sourceTree = "<group>";
-		};
 		50DC445599CCBB8E507F3596 /* ofx */ = {
 			isa = PBXGroup;
 			children = (
@@ -172,17 +143,6 @@
 				8332EA6147695A598297701B /* TouchPad.h */,
 			);
 			name = ofx;
-			sourceTree = "<group>";
-		};
-		558879234BB2324E57304F98 /* src */ = {
-			isa = PBXGroup;
-			children = (
-				BFE0B6C798592B66271BE771 /* Point.cpp */,
-				FA607D2FAE5F44E1770E703E /* PointerEventArgs.cpp */,
-				8364A465E6BAC9C172C4C106 /* PointerEvents.cpp */,
-				81D52F7164ABC2BD5F753100 /* PointShape.cpp */,
-			);
-			name = src;
 			sourceTree = "<group>";
 		};
 		572B4C5840042E0F5AF10C48 /* src */ = {
@@ -210,22 +170,12 @@
 			name = includes;
 			sourceTree = "<group>";
 		};
-		A90A74445A7D9202BDAD9CC7 /* ofx */ = {
-			isa = PBXGroup;
-			children = (
-				090A267B71A213FF1F440ACE /* Point.h */,
-				85A25F4E29F09C8072C174F8 /* PointerEventArgs.h */,
-				E87D9AA5DB31069EC302D135 /* PointerEvents.h */,
-				B5B9DF4B48B8A063C3E7FF46 /* PointShape.h */,
-			);
-			name = ofx;
-			sourceTree = "<group>";
-		};
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
-				CCC21C030DDB54EA180B4E01 /* ofxPointer */,
+				FDD10CE01A179082003D6C4F /* ofxJSON */,
 				5F581F4C723427FD019BF838 /* ofxTouchPad */,
+				FDA2443A1AE57B0D004FC527 /* ofxPointer */,
 			);
 			name = addons;
 			sourceTree = "<group>";
@@ -266,15 +216,6 @@
 				EFFF98C4285732105EAC5FA6 /* ofxTouchPad */,
 			);
 			name = libs;
-			sourceTree = "<group>";
-		};
-		CCC21C030DDB54EA180B4E01 /* ofxPointer */ = {
-			isa = PBXGroup;
-			children = (
-				193CA4A0AE995DF627343AC8 /* src */,
-				4ADAB81114C3760A85ED9941 /* libs */,
-			);
-			name = ofxPointer;
 			sourceTree = "<group>";
 		};
 		CCFB7985013BA093816BA91E /* src */ = {
@@ -341,6 +282,132 @@
 				572B4C5840042E0F5AF10C48 /* src */,
 			);
 			name = ofxTouchPad;
+			sourceTree = "<group>";
+		};
+		FDA2443A1AE57B0D004FC527 /* ofxPointer */ = {
+			isa = PBXGroup;
+			children = (
+				FDA2443B1AE57B0D004FC527 /* src */,
+				FDA2443D1AE57B0D004FC527 /* libs */,
+			);
+			name = ofxPointer;
+			sourceTree = "<group>";
+		};
+		FDA2443B1AE57B0D004FC527 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				FDA2443C1AE57B0D004FC527 /* ofxPointer.h */,
+			);
+			name = src;
+			path = ../../ofxPointer/src;
+			sourceTree = "<group>";
+		};
+		FDA2443D1AE57B0D004FC527 /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				FDA2443E1AE57B0D004FC527 /* ofxPointer */,
+			);
+			name = libs;
+			path = ../../ofxPointer/libs;
+			sourceTree = "<group>";
+		};
+		FDA2443E1AE57B0D004FC527 /* ofxPointer */ = {
+			isa = PBXGroup;
+			children = (
+				FDA2443F1AE57B0D004FC527 /* include */,
+				FDA244431AE57B0D004FC527 /* src */,
+			);
+			path = ofxPointer;
+			sourceTree = "<group>";
+		};
+		FDA2443F1AE57B0D004FC527 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				FDA244401AE57B0D004FC527 /* ofx */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		FDA244401AE57B0D004FC527 /* ofx */ = {
+			isa = PBXGroup;
+			children = (
+				FDA244411AE57B0D004FC527 /* PointerEvents.h */,
+				FDA244421AE57B0D004FC527 /* PointerUtilities.h */,
+			);
+			path = ofx;
+			sourceTree = "<group>";
+		};
+		FDA244431AE57B0D004FC527 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				FDA244441AE57B0D004FC527 /* PointerEvents.cpp */,
+				FDA244451AE57B0D004FC527 /* PointerUtilities.cpp */,
+				FDA244461AE57B0D004FC527 /* PointerUtilities_OSX.mm */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		FDD10CE01A179082003D6C4F /* ofxJSON */ = {
+			isa = PBXGroup;
+			children = (
+				FDD10CE11A179082003D6C4F /* src */,
+				FDD10CE51A179082003D6C4F /* libs */,
+			);
+			name = ofxJSON;
+			sourceTree = "<group>";
+		};
+		FDD10CE11A179082003D6C4F /* src */ = {
+			isa = PBXGroup;
+			children = (
+				FDD10CE21A179082003D6C4F /* ofxJSON.h */,
+				FDD10CE31A179082003D6C4F /* ofxJSONElement.cpp */,
+				FDD10CE41A179082003D6C4F /* ofxJSONElement.h */,
+			);
+			name = src;
+			path = ../../ofxJSON/src;
+			sourceTree = "<group>";
+		};
+		FDD10CE51A179082003D6C4F /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				FDD10CE61A179082003D6C4F /* jsoncpp */,
+			);
+			name = libs;
+			path = ../../ofxJSON/libs;
+			sourceTree = "<group>";
+		};
+		FDD10CE61A179082003D6C4F /* jsoncpp */ = {
+			isa = PBXGroup;
+			children = (
+				FDD10CE71A179082003D6C4F /* include */,
+				FDD10CEB1A179082003D6C4F /* src */,
+			);
+			path = jsoncpp;
+			sourceTree = "<group>";
+		};
+		FDD10CE71A179082003D6C4F /* include */ = {
+			isa = PBXGroup;
+			children = (
+				FDD10CE81A179082003D6C4F /* json */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		FDD10CE81A179082003D6C4F /* json */ = {
+			isa = PBXGroup;
+			children = (
+				FDD10CE91A179082003D6C4F /* json-forwards.h */,
+				FDD10CEA1A179082003D6C4F /* json.h */,
+			);
+			path = json;
+			sourceTree = "<group>";
+		};
+		FDD10CEB1A179082003D6C4F /* src */ = {
+			isa = PBXGroup;
+			children = (
+				FDD10CEC1A179082003D6C4F /* jsoncpp.cpp */,
+			);
+			path = src;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -430,12 +497,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDA244481AE57B0D004FC527 /* PointerUtilities.cpp in Sources */,
+				FDD10CEE1A179082003D6C4F /* jsoncpp.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
+				FDD10CED1A179082003D6C4F /* ofxJSONElement.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
-				9012AAF6FBECC1CAA76106A1 /* Point.cpp in Sources */,
-				5E1F753873A7EF0AD4EDFF9F /* PointerEventArgs.cpp in Sources */,
-				D0402F084189F48C6ED17091 /* PointerEvents.cpp in Sources */,
-				8F29191C96464A5DEF57CCAF /* PointShape.cpp in Sources */,
+				FDA244491AE57B0D004FC527 /* PointerUtilities_OSX.mm in Sources */,
+				FDA244471AE57B0D004FC527 /* PointerEvents.cpp in Sources */,
 				28946A0210AF5802E35A0BE1 /* TouchPad.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -631,6 +699,7 @@
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_52)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)Debug";
+				USER_HEADER_SEARCH_PATHS = "../../ofxPointer/libs/ofxPointer/include/ ../../ofxJSON/libs/jsoncpp/include/";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -717,6 +786,7 @@
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_51)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "../../ofxPointer/libs/ofxPointer/include/ ../../ofxJSON/libs/jsoncpp/include/";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

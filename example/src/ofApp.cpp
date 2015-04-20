@@ -1,6 +1,6 @@
 // =============================================================================
 //
-// Copyright (c) 2010-2014 Christopher Baker <http://christopherbaker.net>
+// Copyright (c) 2010-2015 Christopher Baker <http://christopherbaker.net>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -42,18 +42,18 @@ void ofApp::setup()
     
     //  The following code attempts to prevent conflicts between system-wide
     //  gesture support and the raw TouchPad data provided by ofxTouchPad.
-    //    ofSystem("killall -STOP Dock"); // turn off OS level gesture support ...
-    //    CGAssociateMouseAndMouseCursorPosition(false);
-    //    ofHideCursor();
+        ofSystem("killall -STOP Dock"); // turn off OS level gesture support ...
+        CGAssociateMouseAndMouseCursorPosition(false);
+        ofHideCursor();
 }
 
 
 void ofApp::exit()
 {
     //  The following code re-enables default system-wide gesture support.
-    //    ofSystem("killall -CONT Dock"); // turn on OS level gesture support
-    //    CGAssociateMouseAndMouseCursorPosition(true);
-    //    ofShowCursor();
+        ofSystem("killall -CONT Dock"); // turn on OS level gesture support
+        CGAssociateMouseAndMouseCursorPosition(true);
+        ofShowCursor();
 }
 
 
@@ -72,11 +72,11 @@ void ofApp::draw()
 
     ofRectangle scalingRect = pad.getScalingRect();
     
-    ofRectRounded(scalingRect, 10);
+    ofDrawRectRounded(scalingRect, 10);
     
     ofx::TouchPad::Touches touches = pad.getTouches();
 
-    for(std::size_t i=0; i < touches.size(); ++i)
+    for (std::size_t i = 0; i < touches.size(); ++i)
     {
         ofPushMatrix();
         ofTranslate(touches[i].x, touches[i].y);
@@ -88,12 +88,12 @@ void ofApp::draw()
         
         ofRotateZ(ofRadToDeg(touches[i].angle));
         ofSetColor(255,100);
-        ofEllipse(0,0,w,h);
+        ofDrawEllipse(0,0,w,h);
         ofSetColor(255,255,0,100);
-        ofEllipse(0,0,pressure,pressure);
+        ofDrawEllipse(0,0,pressure,pressure);
         ofSetColor(255,100);
-        ofLine(-w/2.0f,0.0f,w/2.0f,0.0f);
-        ofLine(0.0f,-h/2.0f,0.0f,h/2.0f);
+        ofDrawLine(-w/2.0f,0.0f,w/2.0f,0.0f);
+        ofDrawLine(0.0f,-h/2.0f,0.0f,h/2.0f);
         ofPopMatrix();
         
         ofFill();
@@ -104,37 +104,27 @@ void ofApp::draw()
 }
 
 
-bool ofApp::onPointerUp(ofx::PointerEventArgs& evt)
+void ofApp::onPointerDown(ofx::PointerEventArgs& evt)
+{
+    ofLogNotice("ofApp::onPointerDown") << evt.toString();
+}
+
+
+void ofApp::onPointerUp(ofx::PointerEventArgs& evt)
 {
     ofLogVerbose("ofApp::onPointerUp") << evt.toString();
-    return true;
 }
 
 
-bool ofApp::onPointerDown(ofx::PointerEventArgs& evt)
-{
-    ofLogVerbose("ofApp::onPointerDown") << evt.toString();
-
-    if (evt.getTapCount() > 1)
-    {
-        ofLogVerbose("ofApp::onPointerDown") << "Double tap!";
-    }
-
-    return true;
-}
-
-
-bool ofApp::onPointerMove(ofx::PointerEventArgs& evt)
+void ofApp::onPointerMove(ofx::PointerEventArgs& evt)
 {
     ofLogVerbose("ofApp::onPointerMove") << evt.toString();
-    return true;
 }
 
 
-bool ofApp::onPointerCancel(ofx::PointerEventArgs& evt)
+void ofApp::onPointerCancel(ofx::PointerEventArgs& evt)
 {
     ofLogVerbose("ofApp::onPointerCancel") << evt.toString();
-    return true;
 }
 
 

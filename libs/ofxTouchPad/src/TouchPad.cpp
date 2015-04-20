@@ -1,6 +1,6 @@
 // =============================================================================
 //
-// Copyright (c) 2010-2013 Christopher Baker <http://christopherbaker.net>
+// Copyright (c) 2010-2015 Christopher Baker <http://christopherbaker.net>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -227,6 +227,12 @@ TouchPad::TouchPad():
     _scalingMode(SCALE_TO_WINDOW),
     _scalingRectangle(ofRectangle(0,0,ofGetWidth(),ofGetHeight()))
 {
+    //  The following code attempts to prevent conflicts between system-wide
+    //  gesture support and the raw TouchPad data provided by ofxTouchPad.
+//    ofSystem("killall -STOP Dock"); // turn off OS level gesture support ...
+//    CGAssociateMouseAndMouseCursorPosition(false);
+//    ofHideCursor();
+
     for(std::size_t i = 0; i < MAX_TOUCHES; ++i)
     {
         _tapCounts[i] = TapCount();
@@ -240,7 +246,7 @@ TouchPad::TouchPad():
 bool TouchPad::connect(int deviceId)
 {
 
-    if(_deviceList != NULL && deviceId >= 0 && deviceId < _nDevices)
+    if (0 != _deviceList && deviceId >= 0 && deviceId < _nDevices)
     {
         if (_devices.find(deviceId) == _devices.end()) {
             // get the device reference
@@ -319,9 +325,9 @@ TouchPad::~TouchPad()
 {
     DeviceMap::const_iterator iter = _devices.begin();
     
-    while(iter != _devices.end())
+    while (iter != _devices.end())
     {
-        if(!disconnect(iter->first))
+        if (!disconnect(iter->first))
         {
             ofLogError("TouchPad") << "Unable to disconnect from " << iter->first;
         }
@@ -329,6 +335,11 @@ TouchPad::~TouchPad()
     }
 
     ofLogVerbose("TouchPad") << "Multitouch devices have been disconnected.";
+
+    //  The following code re-enables default system-wide gesture support.
+//    ofSystem("killall -CONT Dock"); // turn on OS level gesture support
+//    CGAssociateMouseAndMouseCursorPosition(true);
+//    ofShowCursor();
 }
 
 
@@ -346,7 +357,7 @@ TouchPad::Touches TouchPad::getTouches() const
 
     TouchMap::const_iterator iter = _activeTouches.begin();
 
-    while(iter != _activeTouches.end())
+    while (iter != _activeTouches.end())
     {
         touches.push_back(iter->second);
         ++iter;
@@ -405,9 +416,29 @@ void TouchPad::setScalingRect(const ofRectangle& scalingRectangle)
 }
 
 
+void TouchPad::disableCoreMouseEvents()
+{
+    ofEvents().mouseMoved.disable();
+    ofEvents().mouseDragged.disable();
+    ofEvents().mousePressed.disable();
+    ofEvents().mouseReleased.disable();
+}
+
+
+void TouchPad::enableCoreMouseEvents()
+{
+    ofEvents().mouseMoved.enable();
+    ofEvents().mouseDragged.enable();
+    ofEvents().mousePressed.enable();
+    ofEvents().mouseReleased.enable();
+}
+
+
+
 std::string TouchPad::touchPhaseToString(MTTouchPhase phase)
 {
-    switch(phase) {
+    switch(phase)
+    {
         case MTTouchStateNotTracking:
             return "MTTouchStateNotTracking";
         case MTTouchStateStartInRange:
@@ -434,7 +465,7 @@ void TouchPad::printDeviceInfo(MTDeviceRef deviceRef)
 {
     uuid_t guid;
 
-    if(!MTDeviceGetGUID(deviceRef, &guid))
+    if (!MTDeviceGetGUID(deviceRef, &guid))
     {
         uuid_string_t val;
         uuid_unparse(guid, val);
@@ -462,26 +493,26 @@ void TouchPad::printDeviceInfo(MTDeviceRef deviceRef)
         }
     }
 
-    if(!MTDeviceGetFamilyID(deviceRef, &a))
+    if (!MTDeviceGetFamilyID(deviceRef, &a))
     {
         ofLogVerbose("TouchPad") << "Family ID: " << a;
     }
     
     int b;
 
-    if(!MTDeviceGetSensorSurfaceDimensions(deviceRef, &a, &b))
+    if (!MTDeviceGetSensorSurfaceDimensions(deviceRef, &a, &b))
     {
         ofLogVerbose("TouchPad") << "Dimensions: " << a/100.0 << " x " << b/100.0;
     }
 
-    if(!MTDeviceGetSensorDimensions(deviceRef, &a, &b))
+    if (!MTDeviceGetSensorDimensions(deviceRef, &a, &b))
     {
         ofLogVerbose("TouchPad") << "Rows: " << a << " Columns: " << b;
     }
 
     if (MTDeviceIsBuiltIn)
     {
-        if(MTDeviceIsBuiltIn(deviceRef))
+        if (MTDeviceIsBuiltIn(deviceRef))
         {
             ofLogVerbose("TouchPad") << "Is device built-in: YES";
         }
@@ -500,4 +531,4 @@ TouchPad& TouchPad::getTouchPadRef()
 }
 
 
-} // ofx
+} // namespace ofx
