@@ -54,6 +54,7 @@
 #include "ofRectangle.h"
 #include "ofUtils.h"
 #include "MTTypes.h"
+#include "Poco/SingletonHolder.h"
 
 
 namespace ofx {
@@ -180,7 +181,7 @@ private:
     static std::string touchPhaseToString(MTTouchPhase phase);
     static void printDeviceInfo(MTDeviceRef d);
     
-    mutable ofMutex _mutex; // to synchronize the system and oF event threads
+    mutable std::mutex _mutex; // to synchronize the system and oF event threads
 
     friend class Poco::SingletonHolder<TouchPad>;
 };

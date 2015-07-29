@@ -33,7 +33,7 @@ void TouchPad::refreshDeviceList()
 {
     _deviceList = MTDeviceCreateList();
     
-    if(_deviceList == NULL)
+    if (_deviceList == NULL)
     {
         _nDevices = 0;
         ofLogError("TouchPad") << "MTDeviceCreateList returned NULL.";
@@ -57,7 +57,7 @@ void TouchPad::mt_callback(MTDeviceRef deviceId,
     
     TouchPad::Touches touchEvents;
     
-    for(std::size_t i = 0; i < numTouches; ++i)
+    for (std::size_t i = 0; i < numTouches; ++i)
     {
         MTTouch* evt = &touches[i];
         
@@ -128,15 +128,15 @@ void TouchPad::mt_callback(MTDeviceRef deviceId,
         touchEvt.pressure       = evt->zTotal;
 //        touchEvt.deviceId       = (unsigned int)deviceId;
         
-        if(evt->phase == MTTouchStateMakeTouch)
+        if (evt->phase == MTTouchStateMakeTouch)
         {
             touchEvt.type = ofTouchEventArgs::down;
         }
-        else if(evt->phase == MTTouchStateTouching)
+        else if (evt->phase == MTTouchStateTouching)
         {
             touchEvt.type = ofTouchEventArgs::move;
         }
-        else if(evt->phase == MTTouchStateOutOfRange)
+        else if (evt->phase == MTTouchStateOutOfRange)
         {
             touchEvt.type = ofTouchEventArgs::up;
         }
@@ -146,7 +146,7 @@ void TouchPad::mt_callback(MTDeviceRef deviceId,
             continue;
         }
 
-        if(touchEvt.id >= 0)
+        if (touchEvt.id >= 0)
         {
             touchEvents.push_back(touchEvt);
         }
@@ -157,7 +157,7 @@ void TouchPad::mt_callback(MTDeviceRef deviceId,
         
     }
 
-    if(!touchEvents.empty())
+    if (!touchEvents.empty())
     {
         pad.registerTouchEvents(touchEvents);
     }
@@ -167,19 +167,19 @@ void TouchPad::mt_callback(MTDeviceRef deviceId,
 
 void TouchPad::registerTouchEvents(const Touches& touchEvents)
 {
-    ofScopedLock lock(_mutex);
+    std::unique_lock<std::mutex> lock(_mutex);
     
     _activeTouches.clear();
     
     unsigned long long now = ofGetElapsedTimeMillis();
 
-    for(std::size_t i = 0; i < touchEvents.size(); ++i)
+    for (std::size_t i = 0; i < touchEvents.size(); ++i)
     {
         ofTouchEventArgs t = touchEvents[i];
         
-        if(t.type == ofTouchEventArgs::down)
+        if (t.type == ofTouchEventArgs::down)
         {
-            if((now - _tapCounts[t.id].lastTap) < _doubleTapSpeed)
+            if ((now - _tapCounts[t.id].lastTap) < _doubleTapSpeed)
             {
                 _tapCounts[t.id].tapCount++;
             }
@@ -233,7 +233,7 @@ TouchPad::TouchPad():
 //    CGAssociateMouseAndMouseCursorPosition(false);
 //    ofHideCursor();
 
-    for(std::size_t i = 0; i < MAX_TOUCHES; ++i)
+    for (std::size_t i = 0; i < MAX_TOUCHES; ++i)
     {
         _tapCounts[i] = TapCount();
     }
@@ -245,10 +245,10 @@ TouchPad::TouchPad():
 
 bool TouchPad::connect(int deviceId)
 {
-
     if (0 != _deviceList && deviceId >= 0 && deviceId < _nDevices)
     {
-        if (_devices.find(deviceId) == _devices.end()) {
+        if (_devices.find(deviceId) == _devices.end())
+        {
             // get the device reference
             MTDeviceRef mtDeviceRef = (MTDeviceRef)CFArrayGetValueAtIndex(_deviceList, deviceId);
             // register the callback for the reference
@@ -275,11 +275,15 @@ bool TouchPad::connect(int deviceId)
             printDeviceInfo(mtDeviceRef);
 
             return true;
-        } else {
+        }
+        else
+        {
             ofLogWarning("TouchPad") << "Already connected to device " << deviceId << ".";
             return false;
         }
-    } else {
+    }
+    else
+    {
         ofLogWarning("TouchPad") << "No multitouch devices available.";
         return false;
     }
@@ -351,7 +355,7 @@ std::size_t TouchPad::getTouchCount() const
 
 TouchPad::Touches TouchPad::getTouches() const
 {
-    ofScopedLock lock(_mutex);
+    std::unique_lock<std::mutex> lock(_mutex);
 
     Touches touches;
 
@@ -432,7 +436,6 @@ void TouchPad::enableCoreMouseEvents()
     ofEvents().mousePressed.enable();
     ofEvents().mouseReleased.enable();
 }
-
 
 
 std::string TouchPad::touchPhaseToString(MTTouchPhase phase)
