@@ -338,7 +338,13 @@ TouchPad::~TouchPad()
         {
             ofLogError("TouchPad") << "Unable to disconnect from " << iter->first;
         }
-        ++iter;
+		else
+		{
+			// Successfully disconnected;
+			return;
+		}
+
+		++iter;
     }
 
     ofLogVerbose("TouchPad") << "Multitouch devices have been disconnected.";
