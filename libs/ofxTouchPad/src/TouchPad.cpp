@@ -264,9 +264,12 @@ bool TouchPad::connect(int deviceId)
 
             ofRectangle rect;
 
-            if(!err) {
+            if (!err)
+			{
                 rect.set(0,0,width/100.0f,height/100.0f);
-            } else {
+            }
+			else
+			{
                 ofLogError("TouchPad") << "Unable to get device dimensions.";
             }
             
