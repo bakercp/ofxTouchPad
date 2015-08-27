@@ -134,7 +134,7 @@ public:
     void disableCoreMouseEvents();
     void enableCoreMouseEvents();
 
-    static TouchPad& getTouchPadRef();
+    static TouchPad& instance();
 
     enum
     {

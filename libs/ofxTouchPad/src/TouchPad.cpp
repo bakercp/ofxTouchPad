@@ -53,7 +53,7 @@ void TouchPad::mt_callback(MTDeviceRef deviceId,
                            double timestamp,
                            int32_t frameNum)
 {
-    TouchPad& pad = TouchPad::getTouchPadRef();
+    TouchPad& pad = TouchPad::instance();
     
     TouchPad::Touches touchEvents;
     
@@ -530,7 +530,7 @@ void TouchPad::printDeviceInfo(MTDeviceRef deviceRef)
 }
 
 
-TouchPad& TouchPad::getTouchPadRef()
+TouchPad& TouchPad::instance()
 {
     static Poco::SingletonHolder<TouchPad> sh;
     return *sh.get();
