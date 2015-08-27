@@ -292,11 +292,11 @@ bool TouchPad::connect(int deviceId)
 
 bool TouchPad::disconnect(int deviceId)
 {
-    if(_deviceList != NULL && deviceId >= 0 && deviceId < _nDevices)
+    if (_deviceList != nullptr && deviceId >= 0 && deviceId < _nDevices)
     {
-        std::map<int,DeviceInfo*>::iterator iter = _devices.find(deviceId);
+        auto iter = _devices.find(deviceId);
 
-        if(iter != _devices.end())
+        if (iter != _devices.end())
         {
             MTDeviceStop(iter->second->ref);
             MTUnregisterContactFrameCallback(iter->second->ref, mt_callback);
@@ -327,7 +327,7 @@ std::size_t TouchPad::getNumDevices() const
 
 TouchPad::~TouchPad()
 {
-    DeviceMap::const_iterator iter = _devices.begin();
+    auto iter = _devices.begin();
     
     while (iter != _devices.end())
     {
@@ -359,7 +359,7 @@ TouchPad::Touches TouchPad::getTouches() const
 
     Touches touches;
 
-    TouchMap::const_iterator iter = _activeTouches.begin();
+    auto iter = _activeTouches.begin();
 
     while (iter != _activeTouches.end())
     {
