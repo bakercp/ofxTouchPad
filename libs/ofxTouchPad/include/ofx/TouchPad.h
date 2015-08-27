@@ -48,6 +48,7 @@
 #endif
 
 
+#include <cstdint>
 #include <map>
 #include "ofAppRunner.h"
 #include "ofEvents.h"
@@ -71,8 +72,8 @@ public:
     {
     }
 
-    unsigned long long lastTap;
-    unsigned long long tapCount;
+    uint64_t lastTap;
+    uint64_t tapCount;
 };
 
 class DeviceInfo
@@ -121,8 +122,8 @@ public:
 
     bool hasTouchId(int touchId) const;
     
-    unsigned long long getDoubleTapSpeed() const;
-    void setDoubleTapSpeed(unsigned long long doubleTapSpeed);
+    uint64_t getDoubleTapSpeed() const;
+    void setDoubleTapSpeed(uint64_t doubleTapSpeed);
     
     ScalingMode getScalingMode() const;
     void setScalingMode(ScalingMode scalingMode);
@@ -175,7 +176,7 @@ private:
     TouchMap _activeTouches;
     DeviceMap _devices;
     
-    unsigned long long _doubleTapSpeed; // ms
+    uint64_t _doubleTapSpeed; // ms
     TapCount _tapCounts[MAX_TOUCHES];   // an internal tap counter
 
     static std::string touchPhaseToString(MTTouchPhase phase);

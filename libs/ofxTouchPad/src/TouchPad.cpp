@@ -384,13 +384,13 @@ bool TouchPad::hasTouchId(int touchId) const
 }
 
 
-unsigned long long TouchPad::getDoubleTapSpeed() const
+uint64_t TouchPad::getDoubleTapSpeed() const
 {
     return _doubleTapSpeed;
 }
 
 
-void TouchPad::setDoubleTapSpeed(unsigned long long doubleTapSpeed)
+void TouchPad::setDoubleTapSpeed(uint64_t doubleTapSpeed)
 {
     _doubleTapSpeed = doubleTapSpeed;
 }
