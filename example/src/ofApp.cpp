@@ -35,10 +35,10 @@ void ofApp::setup()
     ofEnableAlphaBlending();
     ofEnableSmoothing();
     
-    ofx::TouchPad& pad = ofx::TouchPad::getTouchPadRef();
+    TouchPad& pad = TouchPad::instance();
 
     pad.setScalingRect(ofRectangle(100, 100, 160 * 5, 120 * 5));
-    pad.setScalingMode(ofx::TouchPad::SCALE_TO_RECT);
+    pad.setScalingMode(TouchPad::SCALE_TO_RECT);
     
     //  The following code attempts to prevent conflicts between system-wide
     //  gesture support and the raw TouchPad data provided by ofxTouchPad.
@@ -61,7 +61,7 @@ void ofApp::draw()
 {
     ofBackground(0);
     
-    ofx::TouchPad& pad = ofx::TouchPad::getTouchPadRef();
+    TouchPad& pad = TouchPad::instance();
 
     ofSetColor(255,255,255);
     ofDrawBitmapString("TouchCount: " + ofToString(pad.getTouchCount(), 0), 20, 20);
@@ -74,7 +74,7 @@ void ofApp::draw()
     
     ofDrawRectRounded(scalingRect, 10);
     
-    ofx::TouchPad::Touches touches = pad.getTouches();
+    TouchPad::Touches touches = pad.getTouches();
 
     for (std::size_t i = 0; i < touches.size(); ++i)
     {
@@ -104,25 +104,25 @@ void ofApp::draw()
 }
 
 
-void ofApp::onPointerDown(ofx::PointerEventArgs& evt)
+void ofApp::onPointerDown(PointerEventArgs& evt)
 {
     ofLogNotice("ofApp::onPointerDown") << evt.toString();
 }
 
 
-void ofApp::onPointerUp(ofx::PointerEventArgs& evt)
+void ofApp::onPointerUp(PointerEventArgs& evt)
 {
     ofLogVerbose("ofApp::onPointerUp") << evt.toString();
 }
 
 
-void ofApp::onPointerMove(ofx::PointerEventArgs& evt)
+void ofApp::onPointerMove(PointerEventArgs& evt)
 {
     ofLogVerbose("ofApp::onPointerMove") << evt.toString();
 }
 
 
-void ofApp::onPointerCancel(ofx::PointerEventArgs& evt)
+void ofApp::onPointerCancel(PointerEventArgs& evt)
 {
     ofLogVerbose("ofApp::onPointerCancel") << evt.toString();
 }

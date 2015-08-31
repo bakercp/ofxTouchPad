@@ -4,6 +4,7 @@ meta:
 	ADDON_AUTHOR = @bakercp
 	ADDON_TAGS = "touchpad" "multitouch"
 	ADDON_URL = https://github.com/bakercp/ofxTouchPad
+
 common:
 	ADDON_DEPENDENCIES = ofxPointer
 	ADDON_FRAMEWORKS = /System/Library/PrivateFrameworks/MultitouchSupport.framework
