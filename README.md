@@ -1,3 +1,5 @@
+![Screenshot](https://github.com/bakercp/ofxTouchPad/raw/master/screen.png)
+
 Access raw multi-touch device data on OSX 10.5 or greater.
 
 Requires `MultitouchSupport.framework` to be included in the project.

@@ -42,18 +42,18 @@ void ofApp::setup()
     
     //  The following code attempts to prevent conflicts between system-wide
     //  gesture support and the raw TouchPad data provided by ofxTouchPad.
-        ofSystem("killall -STOP Dock"); // turn off OS level gesture support ...
-        CGAssociateMouseAndMouseCursorPosition(false);
-        ofHideCursor();
+    ofSystem("killall -STOP Dock"); // turn off OS level gesture support ...
+    CGAssociateMouseAndMouseCursorPosition(false);
+    ofHideCursor();
 }
 
 
 void ofApp::exit()
 {
     //  The following code re-enables default system-wide gesture support.
-        ofSystem("killall -CONT Dock"); // turn on OS level gesture support
-        CGAssociateMouseAndMouseCursorPosition(true);
-        ofShowCursor();
+    ofSystem("killall -CONT Dock"); // turn on OS level gesture support
+    CGAssociateMouseAndMouseCursorPosition(true);
+    ofShowCursor();
 }
 
 
@@ -98,7 +98,7 @@ void ofApp::draw()
         
         ofFill();
         ofSetColor(255);
-        ofDrawBitmapString(ofToString(touches[i].id),touches[i].x-6, touches[i].y+3);
+        ofDrawBitmapString(ofToString(touches[i].id), touches[i].x-6, touches[i].y+3);
         ofSetColor(255, 255, 255, 100);
     }
 }
