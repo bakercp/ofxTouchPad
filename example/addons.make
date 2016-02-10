@@ -1,1 +1,3 @@
+ofxJSON
+ofxPointer
 ofxTouchPad
