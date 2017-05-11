@@ -7,4 +7,4 @@ meta:
 
 common:
 	ADDON_DEPENDENCIES = ofxPointer
-	ADDON_FRAMEWORKS = /System/Library/PrivateFrameworks/MultitouchSupport.framework
+	ADDON_LDFLAGS = -F/System/Library/PrivateFrameworks -framework MultitouchSupport
