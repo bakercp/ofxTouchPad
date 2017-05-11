@@ -15,7 +15,7 @@ void TouchPad::refreshDeviceList()
 {
     _deviceList = MTDeviceCreateList();
     
-    if (_deviceList == NULL)
+    if (_deviceList == nullptr)
     {
         _nDevices = 0;
         ofLogError("TouchPad") << "MTDeviceCreateList returned NULL.";
@@ -205,9 +205,9 @@ void TouchPad::registerTouchEvents(const Touches& touchEvents)
 
 
 TouchPad::TouchPad():
-    _doubleTapSpeed(DEFAULT_DOUBLE_TAP_SPEED),
     _scalingMode(SCALE_TO_WINDOW),
-    _scalingRectangle(ofRectangle(0,0,ofGetWidth(),ofGetHeight()))
+    _scalingRectangle(ofRectangle(0,0,ofGetWidth(),ofGetHeight())),
+    _doubleTapSpeed(DEFAULT_DOUBLE_TAP_SPEED)
 {
     //  The following code attempts to prevent conflicts between system-wide
     //  gesture support and the raw TouchPad data provided by ofxTouchPad.
@@ -338,24 +338,28 @@ TouchPad::~TouchPad()
 }
 
 
-std::size_t TouchPad::getTouchCount() const
+std::size_t TouchPad::touchCount() const
 {
+    std::unique_lock<std::mutex> lock(_mutex);
     return _activeTouches.size();
 }
 
 
-TouchPad::Touches TouchPad::getTouches() const
+std::size_t TouchPad::getTouchCount() const
+{
+    return touchCount();
+}
+
+
+TouchPad::Touches TouchPad::touches() const
 {
     std::unique_lock<std::mutex> lock(_mutex);
 
     Touches touches;
 
-    auto iter = _activeTouches.begin();
-
-    while (iter != _activeTouches.end())
+    for (auto& touch: _activeTouches)
     {
-        touches.push_back(iter->second);
-        ++iter;
+        touches.push_back(touch.second);
     }
 
     return touches;
@@ -363,14 +367,29 @@ TouchPad::Touches TouchPad::getTouches() const
 }
 
 
+TouchPad::Touches TouchPad::getTouches() const
+{
+    return touches();
+}
+
+
+
+TouchPad::TouchMap TouchPad::touchMap() const
+{
+    std::unique_lock<std::mutex> lock(_mutex);
+    return _activeTouches;
+}
+
+
 TouchPad::TouchMap TouchPad::getTouchMap() const
 {
-    return _activeTouches;
+    return touchMap();
 }
 
 
 bool TouchPad::hasTouchId(int touchId) const
 {
+    std::unique_lock<std::mutex> lock(_mutex);
     return _activeTouches.find(touchId) != _activeTouches.end();
 }
 
@@ -431,7 +450,7 @@ void TouchPad::enableCoreMouseEvents()
 
 std::string TouchPad::touchPhaseToString(MTTouchPhase phase)
 {
-    switch(phase)
+    switch (phase)
     {
         case MTTouchStateNotTracking:
             return "MTTouchStateNotTracking";
@@ -520,8 +539,8 @@ void TouchPad::printDeviceInfo(MTDeviceRef deviceRef)
 
 TouchPad& TouchPad::instance()
 {
-    static Poco::SingletonHolder<TouchPad> sh;
-    return *sh.get();
+    static TouchPad sh;
+    return sh;
 }
 
 

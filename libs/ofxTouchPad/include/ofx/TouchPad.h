@@ -37,7 +37,6 @@
 #include "ofRectangle.h"
 #include "ofUtils.h"
 #include "MTTypes.h"
-#include "Poco/SingletonHolder.h"
 
 
 namespace ofx {
@@ -92,15 +91,20 @@ public:
         ABSOLUTE        = 3
     };
 
-    std::size_t getNumDevices() const;
+    std::size_t numDevices() const;
+    OF_DEPRECATED_MSG("Use numDevices().", std::size_t getNumDevices() const);
 
     bool connect(int deviceId = DEFAULT_DEVICE_ID);
     bool disconnect(int deviceId = DEFAULT_DEVICE_ID);
 
-    std::size_t getTouchCount() const;
+    std::size_t touchCount() const;
+    OF_DEPRECATED_MSG("Use touchCount().", std::size_t getTouchCount() const);
 
-    Touches  getTouches() const;
-    TouchMap getTouchMap() const;
+    Touches touches() const;
+    OF_DEPRECATED_MSG("Use touches().", Touches getTouches() const);
+
+    TouchMap touchMap() const;
+    OF_DEPRECATED_MSG("Use touchMap().", TouchMap getTouchMap() const);
 
     bool hasTouchId(int touchId) const;
     
@@ -166,7 +170,6 @@ private:
     
     mutable std::mutex _mutex; // to synchronize the system and oF event threads
 
-    friend class Poco::SingletonHolder<TouchPad>;
 };
     
 
