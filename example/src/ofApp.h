@@ -12,21 +12,18 @@
 #include "ofxTouchPad.h"
 
 
-using namespace ofx;
-
-
 class ofApp: public ofBaseApp
 {
 public:
-    void setup();
-    void draw();
-    void exit();
+    void setup() override;
+    void draw() override;
+    void exit() override;
 
-    void keyPressed(int key);
+    void keyPressed(int key) override;
 
-    void onPointerDown(PointerEventArgs& evt);
-    void onPointerUp(PointerEventArgs& evt);
-    void onPointerMove(PointerEventArgs& evt);
-    void onPointerCancel(PointerEventArgs& evt);
+    void onPointerDown(ofx::PointerEventArgs& evt);
+    void onPointerUp(ofx::PointerEventArgs& evt);
+    void onPointerMove(ofx::PointerEventArgs& evt);
+    void onPointerCancel(ofx::PointerEventArgs& evt);
 
 };

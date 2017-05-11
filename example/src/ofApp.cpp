@@ -17,13 +17,13 @@ void ofApp::setup()
     ofEnableAlphaBlending();
     ofEnableSmoothing();
     
-    TouchPad& pad = TouchPad::instance();
+    ofx::TouchPad& pad = ofx::TouchPad::instance();
 
     pad.setScalingRect(ofRectangle(100, 100, 160 * 5, 120 * 5));
-    pad.setScalingMode(TouchPad::SCALE_TO_RECT);
+    pad.setScalingMode(ofx::TouchPad::SCALE_TO_RECT);
     
-    //  The following code attempts to prevent conflicts between system-wide
-    //  gesture support and the raw TouchPad data provided by ofxTouchPad.
+    // The following code attempts to prevent conflicts between system-wide
+    // gesture support and the raw TouchPad data provided by ofxTouchPad.
     ofSystem("killall -STOP Dock"); // turn off OS level gesture support ...
     CGAssociateMouseAndMouseCursorPosition(false);
     ofHideCursor();
@@ -32,7 +32,7 @@ void ofApp::setup()
 
 void ofApp::exit()
 {
-    //  The following code re-enables default system-wide gesture support.
+    // The following code re-enables default system-wide gesture support.
     ofSystem("killall -CONT Dock"); // turn on OS level gesture support
     CGAssociateMouseAndMouseCursorPosition(true);
     ofShowCursor();
@@ -43,10 +43,10 @@ void ofApp::draw()
 {
     ofBackground(0);
     
-    TouchPad& pad = TouchPad::instance();
+    ofx::TouchPad& pad = ofx::TouchPad::instance();
 
     ofSetColor(255,255,255);
-    ofDrawBitmapString("TouchCount: " + ofToString(pad.getTouchCount(), 0), 20, 20);
+    ofDrawBitmapString("TouchCount: " + ofToString(pad.touchCount(), 0), 20, 20);
     
     // Simple
     ofFill();
@@ -56,7 +56,7 @@ void ofApp::draw()
     
     ofDrawRectRounded(scalingRect, 10);
     
-    TouchPad::Touches touches = pad.getTouches();
+    ofx::TouchPad::Touches touches = pad.touches();
 
     for (std::size_t i = 0; i < touches.size(); ++i)
     {
@@ -68,7 +68,7 @@ void ofApp::draw()
         
         float pressure = touches[i].pressure * 20;
         
-        ofRotateZ(ofRadToDeg(touches[i].angle));
+        ofRotateZRad(touches[i].angle);
         ofSetColor(255,100);
         ofDrawEllipse(0,0,w,h);
         ofSetColor(255,255,0,100);
@@ -85,31 +85,6 @@ void ofApp::draw()
     }
 }
 
-
-void ofApp::onPointerDown(PointerEventArgs& evt)
-{
-    ofLogNotice("ofApp::onPointerDown") << evt.toString();
-}
-
-
-void ofApp::onPointerUp(PointerEventArgs& evt)
-{
-    ofLogVerbose("ofApp::onPointerUp") << evt.toString();
-}
-
-
-void ofApp::onPointerMove(PointerEventArgs& evt)
-{
-    ofLogVerbose("ofApp::onPointerMove") << evt.toString();
-}
-
-
-void ofApp::onPointerCancel(PointerEventArgs& evt)
-{
-    ofLogVerbose("ofApp::onPointerCancel") << evt.toString();
-}
-
-
 void ofApp::keyPressed(int key)
 {
     if (key == 'f')
@@ -117,4 +92,28 @@ void ofApp::keyPressed(int key)
         ofToggleFullscreen();
         ofBackground(0,0,0);
     }
+}
+
+
+void ofApp::onPointerDown(ofx::PointerEventArgs& evt)
+{
+    ofLogNotice("ofApp::onPointerDown") << evt.toString();
+}
+
+
+void ofApp::onPointerUp(ofx::PointerEventArgs& evt)
+{
+    ofLogVerbose("ofApp::onPointerUp") << evt.toString();
+}
+
+
+void ofApp::onPointerMove(ofx::PointerEventArgs& evt)
+{
+    ofLogVerbose("ofApp::onPointerMove") << evt.toString();
+}
+
+
+void ofApp::onPointerCancel(ofx::PointerEventArgs& evt)
+{
+    ofLogVerbose("ofApp::onPointerCancel") << evt.toString();
 }
