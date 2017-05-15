@@ -11,6 +11,12 @@
 namespace ofx {
 
 
+float TouchPad::_minNormalizedPositionX = 0;
+float TouchPad::_minNormalizedPositionY = 0;
+float TouchPad::_maxNormalizedPositionX = 1;
+float TouchPad::_maxNormalizedPositionY = 1;
+
+
 void TouchPad::refreshDeviceList()
 {
     _deviceList = MTDeviceCreateList();
@@ -18,14 +24,14 @@ void TouchPad::refreshDeviceList()
     if (_deviceList == nullptr)
     {
         _nDevices = 0;
-        ofLogError("TouchPad") << "MTDeviceCreateList returned NULL.";
+        ofLogError("TouchPad::refreshDeviceList") << "MTDeviceCreateList returned NULL.";
     }
     else
     {
         _nDevices = CFArrayGetCount(_deviceList);
     }
 
-    ofLogVerbose("TouchPad") << "MTDeviceCreateList returned " << _nDevices << " devices.";
+    ofLogVerbose("TouchPad::refreshDeviceList") << "MTDeviceCreateList returned " << _nDevices << " devices.";
 }
 
 
@@ -38,78 +44,92 @@ void TouchPad::mt_callback(MTDeviceRef deviceId,
     TouchPad& pad = TouchPad::instance();
     
     TouchPad::Touches touchEvents;
-    
+
+    glm::vec2 windowSize(ofGetWidth(), ofGetHeight());
+    const auto& scalingRect = pad.getScalingRect();
+
     for (std::size_t i = 0; i < numTouches; ++i)
     {
         MTTouch* evt = &touches[i];
-        
+
         ofTouchEventArgs touchEvt;
 
         touchEvt.id             = evt->pathIndex;
         touchEvt.numTouches     = numTouches;
-        
-// touchEvt.timestamp    = ofGetElapsedTimeMillis();
-// touchEvt.frameNumber  = ofGetFrameNum();
-        
+
+        // This is a hack to fix non-normalized position data from the multi-touch framework.
+        _minNormalizedPositionX = std::min(evt->normalizedVector.position.x, _minNormalizedPositionX);
+        _minNormalizedPositionY = std::min(evt->normalizedVector.position.y, _minNormalizedPositionY);
+        _maxNormalizedPositionX = std::max(evt->normalizedVector.position.x, _maxNormalizedPositionX);
+        _maxNormalizedPositionY = std::max(evt->normalizedVector.position.y, _maxNormalizedPositionY);
+
+        glm::vec2 normPos;
+        glm::vec2 normVel;
+
+        normPos.x = ofMap(evt->normalizedVector.position.x,
+                          _minNormalizedPositionX,
+                          _maxNormalizedPositionX,
+                          0,
+                          1,
+                          true);
+
+        normPos.y = 1.0f - ofMap(evt->normalizedVector.position.y,
+                                 _minNormalizedPositionY,
+                                 _maxNormalizedPositionY,
+                                 0,
+                                 1,
+                                 true);
+
+        normVel.x = evt->normalizedVector.velocity.x;
+        normVel.y = 1.0f - evt->normalizedVector.velocity.y;
+
         switch (pad.getScalingMode())
         {
             case SCALE_TO_WINDOW:
             {
-                touchEvt.x  =         evt->normalizedVector.position.x  * ofGetWidth();
-                touchEvt.y  = (1.0f - evt->normalizedVector.position.y) * ofGetHeight();
-//                touchEvt.velocity.x =         evt->normalizedVector.velocity.x  * ofGetWidth();
-//                touchEvt.velocity.y = (1.0f - evt->normalizedVector.velocity.y) * ofGetHeight();
-                touchEvt.xspeed =         evt->normalizedVector.velocity.x  * ofGetWidth();
-                touchEvt.yspeed = (1.0f - evt->normalizedVector.velocity.y) * ofGetHeight();
+                touchEvt.x = normPos.x * windowSize.x;
+                touchEvt.y = normPos.y * windowSize.y;
+                touchEvt.xspeed = normVel.x * windowSize.x;
+                touchEvt.yspeed = normVel.y * windowSize.y;
                 break;
             }
             case SCALE_TO_RECT:
             {
-                ofRectangle r = pad.getScalingRect();
-                touchEvt.x      = evt->normalizedVector.position.x * r.width  + r.x;
-                touchEvt.y      = (1.0f - evt->normalizedVector.position.y) * r.height + r.y;
-//                touchEvt.velocity.x = evt->normalizedVector.velocity.x * r.width  + r.x;
-//                touchEvt.velocity.y = (1.0f - evt->normalizedVector.velocity.y) * r.height + r.y;
-                touchEvt.xspeed = evt->normalizedVector.velocity.x * r.width  + r.x;
-                touchEvt.yspeed = (1.0f - evt->normalizedVector.velocity.y) * r.height + r.y;
+                touchEvt.x = normPos.x * scalingRect.width + scalingRect.x;
+                touchEvt.y = normPos.y * scalingRect.height + scalingRect.y;
+                touchEvt.xspeed = normVel.x * scalingRect.width;
+                touchEvt.yspeed = normVel.y * scalingRect.height;
                 break;
             }
             case NORMALIZED:
             {
-                touchEvt.x      = (1.0f - evt->normalizedVector.position.x);
-                touchEvt.y      =         evt->normalizedVector.position.y;
-//                touchEvt.velocity.x =         evt->normalizedVector.velocity.x;
-//                touchEvt.velocity.y = (1.0f - evt->normalizedVector.velocity.y);
-                touchEvt.xspeed =         evt->normalizedVector.velocity.x;
-                touchEvt.yspeed = (1.0f - evt->normalizedVector.velocity.y);
+                touchEvt.x = normPos.x;
+                touchEvt.y = normPos.y;
+                touchEvt.xspeed = normVel.x;
+                touchEvt.yspeed = normVel.y;
                 break;
             }
             case ABSOLUTE:
             {
-                touchEvt.x      = evt->absoluteVector.position.x;
-                touchEvt.y      = evt->absoluteVector.position.y;
-//                touchEvt.velocity.x = evt->absoluteVector.velocity.x;
-//                touchEvt.velocity.y = evt->absoluteVector.velocity.y;
+                touchEvt.x = evt->absoluteVector.position.x;
+                touchEvt.y = evt->absoluteVector.position.y;
                 touchEvt.xspeed = evt->absoluteVector.velocity.x;
                 touchEvt.yspeed = evt->absoluteVector.velocity.y;
                 break;
             }
             default:
-                ofLogError("TouchPad") << "Unknown scaling mode = " << pad.getScalingMode() << ".";
+                ofLogError("TouchPad::mt_callback") << "Unknown scaling mode = " << pad.getScalingMode() << ".";
         }
                            
-//        touchEvt.acceleration.set(0,0,0);
         touchEvt.xaccel = 0;
         touchEvt.yaccel = 0;
 
         touchEvt.minoraxis = evt->minorAxis;
         touchEvt.majoraxis = evt->majorAxis;
         
-//        touchEvt.contactSize = (ofVec2f(evt->minorAxis,evt->majorAxis));
-        touchEvt.angle          = TWO_PI - evt->angle;
-        touchEvt.pressure       = evt->zTotal;
-//        touchEvt.deviceId       = (unsigned int)deviceId;
-        
+        touchEvt.angle = TWO_PI - evt->angle;
+        touchEvt.pressure = evt->zTotal;
+
         if (evt->phase == MTTouchStateMakeTouch)
         {
             touchEvt.type = ofTouchEventArgs::down;
@@ -124,7 +144,7 @@ void TouchPad::mt_callback(MTDeviceRef deviceId,
         }
         else
         {
-            // other states are available, but we skip t them
+            // Other states are available, but we skip them.
             continue;
         }
 
@@ -134,7 +154,7 @@ void TouchPad::mt_callback(MTDeviceRef deviceId,
         }
         else
         {
-            ofLogError("TouchPad") << "Callback produced an id < 0.";
+            ofLogError("TouchPad::mt_callback") << "Callback produced an id < 0.";
         }
         
     }
@@ -153,7 +173,7 @@ void TouchPad::registerTouchEvents(const Touches& touchEvents)
     
     _activeTouches.clear();
     
-    unsigned long long now = ofGetElapsedTimeMillis();
+    auto now = ofGetElapsedTimeMillis();
 
     for (std::size_t i = 0; i < touchEvents.size(); ++i)
     {
@@ -172,27 +192,23 @@ void TouchPad::registerTouchEvents(const Touches& touchEvents)
             
             _tapCounts[t.id].lastTap = now; // register last tap time
             
-//            t.tapCount = _tapCounts[t.id].tapCount; // record tap count
-//            // send double tap first like ios
-            if(_tapCounts[t.id].tapCount == 2) {
+            if (_tapCounts[t.id].tapCount == 2)
+            {
                 t.type = ofTouchEventArgs::doubleTap;
                 ofNotifyEvent(ofEvents().touchDoubleTap, t);
             }
 
             t.type = ofTouchEventArgs::down;
-//            ofNotifyEvent(ofWindowEvents().touchDown, t);
             ofNotifyEvent(ofEvents().touchDown, t);
             _activeTouches[touchEvents[i].id] = touchEvents[i];
         }
-        else if(t.type == ofTouchEventArgs::move)
+        else if (t.type == ofTouchEventArgs::move)
         {
-//            ofNotifyEvent(ofWindowEvents().touchMoved, t);
             ofNotifyEvent(ofEvents().touchMoved, t);
             _activeTouches[touchEvents[i].id] = touchEvents[i];
         }
-        else if(t.type == ofTouchEventArgs::up)
+        else if (t.type == ofTouchEventArgs::up)
         {
-//            ofNotifyEvent(ofWindowEvents().touchUp, t);
             ofNotifyEvent(ofEvents().touchUp, t);
         }
         else
@@ -207,14 +223,9 @@ void TouchPad::registerTouchEvents(const Touches& touchEvents)
 TouchPad::TouchPad():
     _scalingMode(SCALE_TO_WINDOW),
     _scalingRectangle(ofRectangle(0,0,ofGetWidth(),ofGetHeight())),
-    _doubleTapSpeed(DEFAULT_DOUBLE_TAP_SPEED)
+    _doubleTapSpeed(DEFAULT_DOUBLE_TAP_SPEED),
+    _exitListener(ofEvents().exit.newListener(this, &TouchPad::exit))
 {
-    //  The following code attempts to prevent conflicts between system-wide
-    //  gesture support and the raw TouchPad data provided by ofxTouchPad.
-//    ofSystem("killall -STOP Dock"); // turn off OS level gesture support ...
-//    CGAssociateMouseAndMouseCursorPosition(false);
-//    ofHideCursor();
-
     for (std::size_t i = 0; i < MAX_TOUCHES; ++i)
     {
         _tapCounts[i] = TapCount();
@@ -248,14 +259,14 @@ bool TouchPad::connect(int deviceId)
 
             if (!err)
 			{
-                rect.set(0,0,width/100.0f,height/100.0f);
+                rect.set(0, 0, width / 100.0f, height / 100.0f);
             }
 			else
 			{
-                ofLogError("TouchPad") << "Unable to get device dimensions.";
+                ofLogError("TouchPad::connect") << "Unable to get device dimensions.";
             }
             
-            _devices[deviceId] = new DeviceInfo(mtDeviceRef,deviceId,rect);
+            _devices[deviceId] = new DeviceInfo(mtDeviceRef, deviceId, rect);
             
             printDeviceInfo(mtDeviceRef);
 
@@ -263,13 +274,13 @@ bool TouchPad::connect(int deviceId)
         }
         else
         {
-            ofLogWarning("TouchPad") << "Already connected to device " << deviceId << ".";
+            ofLogWarning("TouchPad::connect") << "Already connected to device " << deviceId << ".";
             return false;
         }
     }
     else
     {
-        ofLogWarning("TouchPad") << "No multitouch devices available.";
+        ofLogWarning("TouchPad::connect") << "No multitouch devices available.";
         return false;
     }
 }
@@ -292,13 +303,13 @@ bool TouchPad::disconnect(int deviceId)
         }
         else
         {
-            ofLogWarning("TouchPad") << "Not connected to device " << deviceId << ".";
+            ofLogWarning("TouchPad::disconnect") << "Not connected to device " << deviceId << ".";
             return false;
         }
     }
     else
     {
-        ofLogWarning("TouchPad") << "No multitouch devices available.";
+        ofLogWarning("TouchPad::disconnect") << "No multitouch devices available.";
         return false;
     }
 }
@@ -312,29 +323,35 @@ std::size_t TouchPad::getNumDevices() const
 
 TouchPad::~TouchPad()
 {
+}
+
+
+void TouchPad::exit(ofEventArgs& etc)
+{
+    // Ensure that it is disabled on destruction.
+    if (_disableOSGestureSupport)
+    {
+        enableOSGestureSupport();
+    }
+
     auto iter = _devices.begin();
-    
+
     while (iter != _devices.end())
     {
         if (!disconnect(iter->first))
         {
-            ofLogError("TouchPad") << "Unable to disconnect from " << iter->first;
+            ofLogError("TouchPad::~TouchPad") << "Unable to disconnect from " << iter->first;
         }
-		else
-		{
-			// Successfully disconnected;
-			return;
-		}
+        else
+        {
+            // Successfully disconnected;
+            return;
+        }
 
-		++iter;
+        ++iter;
     }
 
-    ofLogVerbose("TouchPad") << "Multitouch devices have been disconnected.";
-
-    //  The following code re-enables default system-wide gesture support.
-//    ofSystem("killall -CONT Dock"); // turn on OS level gesture support
-//    CGAssociateMouseAndMouseCursorPosition(true);
-//    ofShowCursor();
+    ofLogVerbose("TouchPad::~TouchPad") << "Multitouch devices have been disconnected.";
 }
 
 
@@ -357,13 +374,12 @@ TouchPad::Touches TouchPad::touches() const
 
     Touches touches;
 
-    for (auto& touch: _activeTouches)
+    for (const auto& touch: _activeTouches)
     {
         touches.push_back(touch.second);
     }
 
     return touches;
-    
 }
 
 
@@ -371,7 +387,6 @@ TouchPad::Touches TouchPad::getTouches() const
 {
     return touches();
 }
-
 
 
 TouchPad::TouchMap TouchPad::touchMap() const
@@ -402,30 +417,35 @@ uint64_t TouchPad::getDoubleTapSpeed() const
 
 void TouchPad::setDoubleTapSpeed(uint64_t doubleTapSpeed)
 {
+    std::unique_lock<std::mutex> lock(_mutex);
     _doubleTapSpeed = doubleTapSpeed;
 }
 
 
 TouchPad::ScalingMode TouchPad::getScalingMode() const
 {
+    std::unique_lock<std::mutex> lock(_mutex);
     return _scalingMode;
 }
 
 
 void TouchPad::setScalingMode(ScalingMode scalingMode)
 {
+    std::unique_lock<std::mutex> lock(_mutex);
     _scalingMode = scalingMode;
 }
 
 
-ofRectangle TouchPad::getScalingRect() const
+const ofRectangle& TouchPad::getScalingRect() const
 {
+    std::unique_lock<std::mutex> lock(_mutex);
     return _scalingRectangle;
 }
 
 
 void TouchPad::setScalingRect(const ofRectangle& scalingRectangle)
 {
+    std::unique_lock<std::mutex> lock(_mutex);
     _scalingRectangle = scalingRectangle;
 }
 
@@ -445,6 +465,35 @@ void TouchPad::enableCoreMouseEvents()
     ofEvents().mouseDragged.enable();
     ofEvents().mousePressed.enable();
     ofEvents().mouseReleased.enable();
+}
+
+
+void TouchPad::enableOSGestureSupport()
+{
+    _disableOSGestureSupport = false;
+
+#if defined(TARGET_OSX)
+    //  The following code re-enables default system-wide gesture support.
+    ofSystem("killall -CONT Dock"); // turn on OS level gesture support
+    CGAssociateMouseAndMouseCursorPosition(true);
+    ofShowCursor();
+#endif
+
+}
+
+
+void TouchPad::disableOSGestureSupport()
+{
+    _disableOSGestureSupport = true;
+
+#if defined(TARGET_OSX)
+    // The following code attempts to prevent conflicts between system-wide
+    // gesture support and the raw TouchPad data provided by ofxTouchPad.
+    ofSystem("killall -STOP Dock"); // turn off OS level gesture support ...
+    CGAssociateMouseAndMouseCursorPosition(false);
+    ofHideCursor();
+#endif
+
 }
 
 
@@ -471,6 +520,8 @@ std::string TouchPad::touchPhaseToString(MTTouchPhase phase)
         default:
             return "MTTouchPhaseInvalid";
     }
+
+    return "UNKNOWN";
 }
 
 
@@ -482,17 +533,25 @@ void TouchPad::printDeviceInfo(MTDeviceRef deviceRef)
     {
         uuid_string_t val;
         uuid_unparse(guid, val);
-        printf("%s ", val);
+        ofLogNotice("TouchPad::printDeviceInfo") << val;
     }
-    
+
+    bool supportsActuation = MTDeviceSupportsActuation(deviceRef);
+    bool supportsForce = MTDeviceSupportsForce(deviceRef);
+
+    ofLogVerbose("TouchPad::printDeviceInfo") << "Supports Actuation: " << supportsActuation;
+    ofLogVerbose("TouchPad::printDeviceInfo") << "Supports Force: " << supportsForce;
+
     int a;
 
     if (!MTDeviceGetDriverType(deviceRef, &a))
     {
-        ofLogVerbose("TouchPad") << "Driver type: " << a;
-//        if(!MTDeviceGetActualType(deviceRef, &a))
+        ofLogVerbose("TouchPad::printDeviceInfo") << "Driver type: " << a;
+
+        int _a;
+//        if (!MTDeviceGetActualType(deviceRef, &_a))
 //        {
-//            ofLogVerbose("TouchPad") << "Actual Driver type: " << a;
+//            ofLogVerbose("TouchPad::printDeviceInfo") << "Actual Driver type: " << _a;
 //        }
     }
     
@@ -502,36 +561,36 @@ void TouchPad::printDeviceInfo(MTDeviceRef deviceRef)
         
         if (!MTDeviceGetDeviceID(deviceRef, &devID))
         {
-            ofLogVerbose("TouchPad") << "Device ID: " << devID;
+            ofLogVerbose("TouchPad::printDeviceInfo") << "Device ID: " << devID;
         }
     }
 
     if (!MTDeviceGetFamilyID(deviceRef, &a))
     {
-        ofLogVerbose("TouchPad") << "Family ID: " << a;
+        ofLogVerbose("TouchPad::printDeviceInfo") << "Family ID: " << a;
     }
     
     int b;
 
     if (!MTDeviceGetSensorSurfaceDimensions(deviceRef, &a, &b))
     {
-        ofLogVerbose("TouchPad") << "Dimensions: " << a/100.0 << " x " << b/100.0;
+        ofLogVerbose("TouchPad::printDeviceInfo") << "Dimensions: " << a / 100.0f << " x " << b / 100.0;
     }
 
     if (!MTDeviceGetSensorDimensions(deviceRef, &a, &b))
     {
-        ofLogVerbose("TouchPad") << "Rows: " << a << " Columns: " << b;
+        ofLogVerbose("TouchPad::printDeviceInfo") << "Rows: " << a << " Columns: " << b;
     }
 
     if (MTDeviceIsBuiltIn)
     {
         if (MTDeviceIsBuiltIn(deviceRef))
         {
-            ofLogVerbose("TouchPad") << "Is device built-in: YES";
+            ofLogVerbose("TouchPad::printDeviceInfo") << "Is device built-in: YES";
         }
         else
         {
-            ofLogVerbose("TouchPad") << "Is device built-in: NO";
+            ofLogVerbose("TouchPad::printDeviceInfo") << "Is device built-in: NO";
         }
     }
 }

@@ -57,6 +57,7 @@ public:
     uint64_t tapCount;
 };
 
+
 class DeviceInfo
 {
 public:
@@ -85,9 +86,13 @@ public:
 
     enum ScalingMode
     {
+        /// \brief Scale the touchpad coordinates to the size of the window.
         SCALE_TO_WINDOW = 0,
+        /// \brief Scale the touchpad coordinates to the given scaling rectangle.
         SCALE_TO_RECT   = 1,
+        /// \brief Use touchpad coordinates scaled from 0-1.
         NORMALIZED      = 2,
+        /// \brief Use the absolute coordinates provided by the driver.
         ABSOLUTE        = 3
     };
 
@@ -114,12 +119,16 @@ public:
     ScalingMode getScalingMode() const;
     void setScalingMode(ScalingMode scalingMode);
 
-    ofRectangle getScalingRect() const;
+    const ofRectangle& getScalingRect() const;
     void setScalingRect(const ofRectangle& scalingRect);
 
     void disableCoreMouseEvents();
     void enableCoreMouseEvents();
 
+    void disableOSGestureSupport();
+    void enableOSGestureSupport();
+
+    /// \returns a singleton TouchPad instance.
     static TouchPad& instance();
 
     enum
@@ -142,7 +151,9 @@ private:
     virtual ~TouchPad();
     TouchPad(const TouchPad&);
     TouchPad& operator=(const TouchPad&);
-    
+
+    void exit(ofEventArgs& etc);
+
     void registerTouchEvents(const Touches& touchEvents);
     
     static void mt_callback(MTDeviceRef deviceId,
@@ -151,10 +162,16 @@ private:
                             double timestamp,
                             int32_t frameNum);
 
-    
     ScalingMode _scalingMode;
     ofRectangle _scalingRectangle;
-    
+
+    // We keep track of normalized position because the driver isn't delivering
+    // values in the range 0-1 in all cases.
+    static float _minNormalizedPositionX;
+    static float _minNormalizedPositionY;
+    static float _maxNormalizedPositionX;
+    static float _maxNormalizedPositionY;
+
     void refreshDeviceList();
     CFMutableArrayRef _deviceList;
     std::size_t _nDevices;
@@ -169,6 +186,11 @@ private:
     static void printDeviceInfo(MTDeviceRef d);
     
     mutable std::mutex _mutex; // to synchronize the system and oF event threads
+
+    bool _disableOSGestureSupport = false;
+
+    // To ensure that no global oF methods are called before exit.
+    ofEventListener _exitListener;
 
 };
     

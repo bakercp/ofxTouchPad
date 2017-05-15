@@ -21,21 +21,21 @@ void ofApp::setup()
 
     pad.setScalingRect(ofRectangle(100, 100, 160 * 5, 120 * 5));
     pad.setScalingMode(ofx::TouchPad::SCALE_TO_RECT);
-    
+
     // The following code attempts to prevent conflicts between system-wide
     // gesture support and the raw TouchPad data provided by ofxTouchPad.
-    ofSystem("killall -STOP Dock"); // turn off OS level gesture support ...
-    CGAssociateMouseAndMouseCursorPosition(false);
-    ofHideCursor();
+    //
+    // It also means that the dock will be disabled, which can be annoying in
+    // multi-tasking situations.
+    ofx::TouchPad::instance().disableOSGestureSupport();
+
 }
 
 
 void ofApp::exit()
 {
     // The following code re-enables default system-wide gesture support.
-    ofSystem("killall -CONT Dock"); // turn on OS level gesture support
-    CGAssociateMouseAndMouseCursorPosition(true);
-    ofShowCursor();
+    ofx::TouchPad::instance().enableOSGestureSupport();
 }
 
 
@@ -43,47 +43,43 @@ void ofApp::draw()
 {
     ofBackground(0);
     
-    ofx::TouchPad& pad = ofx::TouchPad::instance();
+    auto& pad = ofx::TouchPad::instance();
 
-    ofSetColor(255,255,255);
     ofDrawBitmapString("TouchCount: " + ofToString(pad.touchCount(), 0), 20, 20);
     
-    // Simple
     ofFill();
     ofSetColor(255, 255, 255, 100);
-
-    ofRectangle scalingRect = pad.getScalingRect();
+    ofDrawRectRounded(pad.getScalingRect(), 10);
     
-    ofDrawRectRounded(scalingRect, 10);
-    
-    ofx::TouchPad::Touches touches = pad.touches();
-
-    for (std::size_t i = 0; i < touches.size(); ++i)
+    for (const auto& touch: pad.touches())
     {
         ofPushMatrix();
-        ofTranslate(touches[i].x, touches[i].y);
+        ofTranslate(touch);
         
-        float w = touches[i].majoraxis * 5;
-        float h = touches[i].minoraxis * 5;
+        float w = touch.majoraxis * 5;
+        float h = touch.minoraxis * 5;
+        float halfW = w / 2.0f;
+        float halfH = h / 2.0f;
+
+        float pressure = touch.pressure * 20;
         
-        float pressure = touches[i].pressure * 20;
-        
-        ofRotateZRad(touches[i].angle);
+        ofRotateZRad(touch.angle);
+        ofSetColor(255, 100);
+        ofDrawEllipse(0, 0, w, h);
+        ofSetColor(255, 255,0, 100);
+        ofDrawEllipse(0,0, pressure, pressure);
         ofSetColor(255,100);
-        ofDrawEllipse(0,0,w,h);
-        ofSetColor(255,255,0,100);
-        ofDrawEllipse(0,0,pressure,pressure);
-        ofSetColor(255,100);
-        ofDrawLine(-w/2.0f,0.0f,w/2.0f,0.0f);
-        ofDrawLine(0.0f,-h/2.0f,0.0f,h/2.0f);
+        ofDrawLine(-halfW, 0.0f, halfW, 0.0f);
+        ofDrawLine(0.0f, -halfH, 0.0f, halfH);
         ofPopMatrix();
         
         ofFill();
         ofSetColor(255);
-        ofDrawBitmapString(ofToString(touches[i].id), touches[i].x-6, touches[i].y+3);
+        ofDrawBitmapString(ofToString(touch.id), touch.x - 6, touch.y + 3);
         ofSetColor(255, 255, 255, 100);
     }
 }
+
 
 void ofApp::keyPressed(int key)
 {

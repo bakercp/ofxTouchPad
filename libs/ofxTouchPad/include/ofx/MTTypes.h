@@ -36,6 +36,7 @@
 /* ------------------------------------------------------------------------- */
 
 // https://github.com/calftrail/TrackMagic/blob/master/MultitouchSupport.h
+// https://github.com/INRIA/libpointing/blob/master/pointing/input/osx/osxPrivateMultitouchSupport.h
 
 /* 
 
@@ -55,7 +56,18 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-    
+    typedef enum
+    {
+        VERBOSE = 0,
+        LESS_VERBOSE = 0x10000000
+    } MTRunMode;
+
+    typedef enum
+    {
+        OFF = 0,
+        ON = 1
+    } MTEasyCallbackState;
+
     typedef enum {
         MTTouchStateNotTracking   = 0,
         MTTouchStateStartInRange  = 1,
@@ -121,14 +133,22 @@ extern "C" {
     //    void MTRegisterImageCallback(MTDeviceRef deviceId,MTContactCallbackFunction cb);
     //    void MTUnregisterImageCallback(MTDeviceRef deviceId, MTRegisterImageCallbackFunction cb);
     
-    void MTDeviceStart(MTDeviceRef deviceId, int32_t i = 0);
+    void MTDeviceStart(MTDeviceRef deviceId, MTRunMode mode = LESS_VERBOSE);
     void MTDeviceStop(MTDeviceRef deviceId);
     void MTDeviceRelease(MTDeviceRef deviceId);
     bool MTDeviceIsRunning(MTDeviceRef deviceId);
 
     OSStatus MTDeviceGetSensorSurfaceDimensions(MTDeviceRef deviceId, int32_t* width, int32_t* height);
     OSStatus MTDeviceGetSensorDimensions(MTDeviceRef deviceId, int32_t* rows, int32_t* columns);
-    
+
+    char* MTGetPathStageName(MTTouchPhase touchPhase);
+
+    bool MTDevicePowerControlSupported(MTDeviceRef dev);
+    void MTDeviceSetUILocked(MTDeviceRef dev, bool state);
+
+
+    bool MTDeviceIsAlive(MTDeviceRef dev) ;
+    bool MTDeviceIsMTHIDDevice(MTDeviceRef dev);
     bool MTDeviceIsValid(MTDeviceRef deviceId);
     bool MTDeviceIsBuiltIn(MTDeviceRef deviceId) __attribute__ ((weak_import));	// no 10.5
     bool MTDeviceIsOpaqueSurface(MTDeviceRef deviceId);
@@ -139,6 +159,9 @@ extern "C" {
     OSStatus MTDeviceGetDriverType(MTDeviceRef, int32_t*);
 //    OSStatus MTDeviceGetActualType(MTDeviceRef, int32_t*);
     OSStatus MTDeviceGetGUID(MTDeviceRef deviceId, uuid_t* guid);
+
+    bool MTDeviceSupportsActuation(MTDeviceRef deviceId);
+    bool MTDeviceSupportsForce(MTDeviceRef deviceId);
 
         
 #ifdef __cplusplus
