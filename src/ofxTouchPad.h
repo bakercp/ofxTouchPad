@@ -8,6 +8,5 @@
 #pragma once
 
 
-#include "ofxPointer.h"
 #include "ofx/MTTypes.h"
 #include "ofx/TouchPad.h"

@@ -29,6 +29,9 @@ void ofApp::setup()
     // multi-tasking situations.
     ofx::TouchPad::instance().disableOSGestureSupport();
 
+    // Disable mouse events so pointer events won't be duplicated.
+    ofx::TouchPad::instance().disableCoreMouseEvents();
+
 }
 
 
@@ -93,7 +96,7 @@ void ofApp::keyPressed(int key)
 
 void ofApp::onPointerDown(ofx::PointerEventArgs& evt)
 {
-    ofLogNotice("ofApp::onPointerDown") << evt.toString();
+    ofLogVerbose("ofApp::onPointerDown") << evt.toString();
 }
 
 

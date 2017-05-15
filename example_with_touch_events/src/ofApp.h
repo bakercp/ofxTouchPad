@@ -21,9 +21,12 @@ public:
 
     void keyPressed(int key) override;
 
-    void onPointerDown(ofx::PointerEventArgs& evt);
-    void onPointerUp(ofx::PointerEventArgs& evt);
-    void onPointerMove(ofx::PointerEventArgs& evt);
-    void onPointerCancel(ofx::PointerEventArgs& evt);
+    void touchDown(ofTouchEventArgs& touch) override;
+    void touchMoved(ofTouchEventArgs& touch) override;
+    void touchUp(ofTouchEventArgs& touch) override;
+    void touchDoubleTap(ofTouchEventArgs& touch) override;
+    void touchCancelled(ofTouchEventArgs& touch) override;
+
+    std::string to_string(const ofTouchEventArgs& touch);
 
 };

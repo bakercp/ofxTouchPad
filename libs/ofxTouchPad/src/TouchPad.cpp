@@ -456,6 +456,10 @@ void TouchPad::disableCoreMouseEvents()
     ofEvents().mouseDragged.disable();
     ofEvents().mousePressed.disable();
     ofEvents().mouseReleased.disable();
+
+    ofEvents().mouseScrolled.disable();
+    ofEvents().mouseEntered.disable();
+    ofEvents().mouseExited.disable();
 }
 
 
@@ -465,6 +469,10 @@ void TouchPad::enableCoreMouseEvents()
     ofEvents().mouseDragged.enable();
     ofEvents().mousePressed.enable();
     ofEvents().mouseReleased.enable();
+
+    ofEvents().mouseScrolled.enable();
+    ofEvents().mouseEntered.enable();
+    ofEvents().mouseExited.enable();
 }
 
 

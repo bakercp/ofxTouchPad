@@ -1,10 +1,9 @@
 meta:
 	ADDON_NAME = ofxTouchPad
-	ADDON_DESCRIPTION = OSX Multitouch driver.
+	ADDON_DESCRIPTION = Multitouch support for touchpads.
 	ADDON_AUTHOR = @bakercp
 	ADDON_TAGS = "touchpad" "multitouch"
 	ADDON_URL = https://github.com/bakercp/ofxTouchPad
 
-common:
-	ADDON_DEPENDENCIES = ofxPointer
+osx:
 	ADDON_LDFLAGS = -F/System/Library/PrivateFrameworks -framework MultitouchSupport
