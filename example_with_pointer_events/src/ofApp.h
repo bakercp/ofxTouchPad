@@ -22,9 +22,6 @@ public:
 
     void keyPressed(int key) override;
 
-    void onPointerDown(ofx::PointerEventArgs& evt);
-    void onPointerUp(ofx::PointerEventArgs& evt);
-    void onPointerMove(ofx::PointerEventArgs& evt);
-    void onPointerCancel(ofx::PointerEventArgs& evt);
+    void onPointerEvent(ofx::PointerEventArgs& evt);
 
 };

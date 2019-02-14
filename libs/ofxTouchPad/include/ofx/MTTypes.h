@@ -96,7 +96,7 @@ extern "C" {
         MTTouchPhase phase;        // the current state (not sure what the values mean)
         int32_t  fingerID;	       // "F" (~identity)
         int32_t  handID;		   // "H" (always 1)
-        MTVector normalizedVector; // normalized position / velocity vectory
+        MTVector normalizedVector; // normalized position / velocity vector
         float    zTotal;           // the "area" of the touch (larger finger pad / more pressure => bigger size)
                                    // "ZTot" (~quality, multiple of 1/8 between 0 and 1)
         int32_t  UNKNOWN_0;        // unknown

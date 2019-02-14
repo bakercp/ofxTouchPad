@@ -10,14 +10,9 @@
 
 void ofApp::setup()
 {
-    ofx::RegisterPointerEvents(this);
+    ofx::RegisterPointerEvent(this);
 
-    ofSetLogLevel(OF_LOG_VERBOSE);
-    ofSetFrameRate(120);
-    ofEnableAlphaBlending();
-    ofEnableSmoothing();
-    
-    ofx::TouchPad& pad = ofx::TouchPad::instance();
+    auto& pad = ofx::TouchPad::instance();
 
     pad.setScalingRect(ofRectangle(100, 100, 160 * 5, 120 * 5));
     pad.setScalingMode(ofx::TouchPad::SCALE_TO_RECT);
@@ -27,18 +22,17 @@ void ofApp::setup()
     //
     // It also means that the dock will be disabled, which can be annoying in
     // multi-tasking situations.
-    ofx::TouchPad::instance().disableOSGestureSupport();
-
-    // Disable mouse events so pointer events won't be duplicated.
-    ofx::TouchPad::instance().disableCoreMouseEvents();
+    pad.disableOSGestureSupport();
 
 }
 
 
 void ofApp::exit()
 {
+    auto& pad = ofx::TouchPad::instance();
+
     // The following code re-enables default system-wide gesture support.
-    ofx::TouchPad::instance().enableOSGestureSupport();
+    pad.enableOSGestureSupport();
 }
 
 
@@ -71,7 +65,7 @@ void ofApp::draw()
         ofDrawEllipse(0, 0, w, h);
         ofSetColor(255, 255,0, 100);
         ofDrawEllipse(0,0, pressure, pressure);
-        ofSetColor(255,100);
+        ofSetColor(255, 100);
         ofDrawLine(-halfW, 0.0f, halfW, 0.0f);
         ofDrawLine(0.0f, -halfH, 0.0f, halfH);
         ofPopMatrix();
@@ -94,25 +88,7 @@ void ofApp::keyPressed(int key)
 }
 
 
-void ofApp::onPointerDown(ofx::PointerEventArgs& evt)
+void ofApp::onPointerEvent(ofx::PointerEventArgs& evt)
 {
-    ofLogVerbose("ofApp::onPointerDown") << evt.toString();
-}
-
-
-void ofApp::onPointerUp(ofx::PointerEventArgs& evt)
-{
-    ofLogVerbose("ofApp::onPointerUp") << evt.toString();
-}
-
-
-void ofApp::onPointerMove(ofx::PointerEventArgs& evt)
-{
-    ofLogVerbose("ofApp::onPointerMove") << evt.toString();
-}
-
-
-void ofApp::onPointerCancel(ofx::PointerEventArgs& evt)
-{
-    ofLogVerbose("ofApp::onPointerCancel") << evt.toString();
+    ofLogNotice("ofApp::onPointerEvent") << evt.toString();
 }

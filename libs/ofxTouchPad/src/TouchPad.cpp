@@ -6,6 +6,8 @@
 
 
 #include "ofx/TouchPad.h"
+#include "ofMath.h" 
+#include "ofLog.h"
 
 
 namespace ofx {
@@ -127,7 +129,7 @@ void TouchPad::mt_callback(MTDeviceRef deviceId,
         touchEvt.minoraxis = evt->minorAxis;
         touchEvt.majoraxis = evt->majorAxis;
         
-        touchEvt.angle = TWO_PI - evt->angle;
+        touchEvt.angle = glm::two_pi<float>() - evt->angle;
         touchEvt.pressure = evt->zTotal;
 
         if (evt->phase == MTTouchStateMakeTouch)
@@ -163,7 +165,6 @@ void TouchPad::mt_callback(MTDeviceRef deviceId,
     {
         pad.registerTouchEvents(touchEvents);
     }
-
 }
 
 
