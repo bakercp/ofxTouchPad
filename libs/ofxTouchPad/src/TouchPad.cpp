@@ -34,6 +34,9 @@ void TouchPad::refreshDeviceList()
     }
 
     ofLogVerbose("TouchPad::refreshDeviceList") << "MTDeviceCreateList returned " << _nDevices << " devices.";
+
+    for (CFIndex i = 0; i < _nDevices; ++i)
+        printDeviceInfo(CFArrayGetValueAtIndex(_deviceList, i));
 }
 
 
@@ -269,7 +272,7 @@ bool TouchPad::connect(int deviceId)
             
             _devices[deviceId] = new DeviceInfo(mtDeviceRef, deviceId, rect);
             
-            printDeviceInfo(mtDeviceRef);
+            // printDeviceInfo(mtDeviceRef);
 
             return true;
         }
@@ -536,6 +539,8 @@ std::string TouchPad::touchPhaseToString(MTTouchPhase phase)
 
 void TouchPad::printDeviceInfo(MTDeviceRef deviceRef)
 {
+    ofLogVerbose("TouchPad::printDeviceInfo") << "-------------------";
+
     uuid_t guid;
 
     if (!MTDeviceGetGUID(deviceRef, &guid))

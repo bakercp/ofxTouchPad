@@ -10,6 +10,8 @@
 
 void ofApp::setup()
 {
+    ofSetLogLevel(OF_LOG_VERBOSE);
+    
     ofx::RegisterPointerEvent(this);
 
     auto& pad = ofx::TouchPad::instance();
